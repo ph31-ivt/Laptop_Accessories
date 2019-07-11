@@ -62,7 +62,7 @@
                                     <td class="text-center">{{$product->quantity}}</td>
                                     <td>{{$product->category->name}}</td>
                                     <td class="row">
-                                        <button type="button" class="btn btn-info btn-sm ml-2" id="edit-item" data-product_id="{{$product->id}}"><i class="fas fa-plus-circle"></i></button>
+                                        <button type="button" class="btn btn-info btn-sm ml-2" id="edit-item" data-product_id="{{$product->id}}" title="Import quantity for product"><i class="fas fa-plus-circle"></i></button>
                                         <a href="{{Route('admin.create.productdetail',$product->id)}}" class="btn btn-info btn-sm ml-1" title="show product and create detail "><i class="far fa-file-alt"></i></a>
                                         <a href="{{Route('edit-product-info',$product->id)}}" class="btn btn-secondary btn-sm ml-1"><i class="fas fa-pencil-alt" title="update"></i></a>
                                         <form action="{{Route('delete-product', $product->id)}}" method="post" 

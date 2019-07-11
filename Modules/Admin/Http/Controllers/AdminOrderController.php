@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Order;
 use App\User;
+use Modules\Admin\Http\Controllers\AdminOrderDetailController;
+
 class AdminOrderController extends Controller
 {
     /**
@@ -78,18 +80,27 @@ class AdminOrderController extends Controller
     {
         //
     }
-    public function approve($id){
+    public function check($id, $index){
         $order=Order::find($id);
+        if($index>=1 && $index<=3 && $order->status<$index){
+            if($order->status!=2){
+                if($index==2){
+                    $linkorder_id= new AdminOrderDetailController();
+                    $linkorder_id->exportproduct($id); 
+                }
+                $order->status=$index;
+                $order->save();
+                return back()->with('msg', 'update order is successful!!')->with('attribute', 'success');
+            }
+            else{
+                return back()->with('msg', 'This order was paid, not changes!!!')->with('attribute', 'warning');
+            }
+        }
+        else{
+                return back()->with('msg', 'Check order fails!!!')->with('attribute', 'danger');
+            }
         $order->status=1;
         $order->save();
         return back()->with('msg','xác nhận thành công')->with('attribute','success');
-    }
-    public  function cancel($id){
-       $order=Order::find($id);
-       $order->status=3;
-       $order->save();
-       return back()->with('msg','đã hủy đơn hàng')->with('attribute','danger');
-
-
     }
 }

@@ -18,7 +18,6 @@ class AdminCommentController extends Controller
     public function index()
     {
         $commentlist=Comment::with('user', 'product')->get();
-       //dd($commentlist);
         return view('admin::comment.index',compact('commentlist'));
     }
 
@@ -77,8 +76,19 @@ class AdminCommentController extends Controller
      * @param int $id
      * @return Response
      */
-    public function changestatus($id){
-        dd('success');
+    public function changestatus($id,$index){
+       $comment=Comment::find($id);
+       if($index>=1 && $index<=3){
+            if($index<3){
+                $comment->status=$index;
+                $comment->save();
+                return back()->with('msg', 'update is successful!')->with('attribute', 'success');
+            }
+            if($index==3){
+                $comment->delete();
+                return back()->with('msg', 'delete is successful!')->with('attribute', 'danger');
+            }
+       }
     }
     public function destroy($id)
     {

@@ -5,6 +5,7 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Http\Controllers\AdminProductController;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
@@ -75,6 +76,12 @@ class AdminOrderDetailController extends Controller
      * @param int $id
      * @return Response
      */
+    public function exportproduct($order_id){
+        $orderdetaillist=OrderDetail::where('order_id', $order_id)->get();
+        $linkexportproduct= new AdminProductController();
+        $linkexportproduct->export($orderdetaillist);
+        //sdd($linkexportproduct);
+    }
     public function destroy($id)
     {
         //

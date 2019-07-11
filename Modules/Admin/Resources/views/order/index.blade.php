@@ -57,25 +57,26 @@
                                     <td class="font-weight-bold text-muted">{{$order->user->name}}</td>
                                     <td class="text-left">{{$order->phone}}</td>
                                     <td>{{$order->created_at}}</td>
-                                    <td class="text-center"><?php switch ($order->status) {
-                                        case 0:
-                                            echo "Chưa xác nhận";
-                                            break;
-                                        case 1:
-                                            echo "Đã xác nhận";
-                                            break;
-                                        case 2:
-                                            echo "Đã thanh toán";
-                                            break;
-                                        case 3:
-                                            echo "Đã hủy";
-                                            break;
-                                    } ?></td>
-                                    <td class="text-center">{{number_format($order->total_price)}}</td>
-                                    <td class="row">
-                                        <a href="{{Route('approve-order',$order->id)}}" class="btn btn-info btn-sm ml-4" title="approve" onclick="return confirm('Do you want to approve this order!')"><i class="far fa-check-circle"></i></a>
+                                     @switch($order->status)
+                                            @case(0)
+                                                    <td class="text-center text-warning font-weight-bold" title="waiting">waiting</td>
+                                            @break
+                                            @case(1)
+                                                    <td class="text-center text-info font-weight-bold" title="checked">Confirm</td>
+                                            @break
+                                            @case(2)
+                                                    <td class="text-center text-success font-weight-bold" title="paid">Paid</td>
+                                            @break
+                                            @case(3)
+                                                    <td class="text-center text-muted font-weight-bold" title="block">Cancelled</td>
+                                            @break
+                                            @endswitch
+                                        <td class="text-center">{{number_format($order->total_price)}}</td>
+                                        <td class="row">
+                                        <a href="{{Route('check-order',[$order->id,1])}}" class="btn btn-info btn-sm ml-4" title="approve" onclick="return confirm('Do you want to approve this order!')"><i class="fas fa-thumbs-up"></i></a>
+                                        <a href="{{Route('check-order',[$order->id,2])}}" class="btn btn-info btn-sm ml-1" title="approve" onclick="return confirm('Do you want to pay this order!')"><i class="far fa-check-circle"></i></a>
                                         <a href="{{Route('get-order-detail', $order->id)}}" class="btn btn-info btn-sm ml-1" title="show detail "><i class="far fa-file-alt"></i></a>
-                                        <a href="{{Route('cancel-order',$order->id)}}" class="btn btn-danger btn-sm ml-1" title="cancel order" onclick="return confirm('Do you want to Cancel this order!')"><i class="fas fa-window-close"></i></a>
+                                        <a href="{{Route('check-order',[$order->id,3])}}" class="btn btn-danger btn-sm ml-1" title="cancel order" onclick="return confirm('Do you want to Cancel this order!')"><i class="fas fa-window-close"></i></a>
                                         
                                     </td>
                                 </tr>

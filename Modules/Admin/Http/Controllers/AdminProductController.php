@@ -141,11 +141,25 @@ class AdminProductController extends Controller
     public function getdetail($id){
         dd(true);
     }
+    public function export($listorderdetail){
+        foreach ($listorderdetail as $orderdetail) {
+            $product=Product::find($orderdetail->product_id);
+            if($product->quantity>=$orderdetail->quantity){
+                $product->quantity-=$orderdetail->quantity;
+                $product->save();
+            }
+            else{
+
+                return back()->with('msg','Not enough quantity to export')->with('attribute', 'danger');
+            }
+        }
+    }
     public function destroy($id)
     {
         $product=Product::find($id);
         $product->delete();
-        $product->forceDelete();
+        //$product->forceDelete();
         return redirect()->Route('admin.get.listproduct');
     }
+
 }

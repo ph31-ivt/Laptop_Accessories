@@ -42,8 +42,7 @@ Route::prefix('admin')->group(function() {
     Route::group(['prefix'=>'order'], function(){
     	Route::get('/','AdminOrderController@index')->name('admin.get.listorder');
         Route::get('/oderdetail/{id}', 'AdminOrderDetailController@index')->name('get-order-detail');
-        Route::get('/approve-order/{id}','AdminOrderController@approve')->name('approve-order');
-        Route::get('/cancel-order/{id}', 'AdminOrderController@cancel')->name('cancel-order');
+        Route::get('/check-order/{id}/{index}','AdminOrderController@check')->name('check-order');
     });
     Route::group(['prefix'=>'user'], function(){
     	Route::get('/index','AdminUserController@index')->name('admin.get.listuser');
@@ -53,9 +52,10 @@ Route::prefix('admin')->group(function() {
     });
     Route::group(['prefix'=>'comment'], function(){
     	Route::get('/','AdminCommentController@index')->name('admin.get.listcomment');
+        Route::get('/update-status/{id}/{idex}','AdminCommentController@changestatus')->name('update-status');
     });
     Route::group(['prefix'=>'image'], function(){
-        Route::get('/update-status/{id}','AdminCommentController@update')->name('update-status-comment');
+       
         Route::post('/store_image/{id}','AdminImageController@store')->name('store-image');
     });
 });
