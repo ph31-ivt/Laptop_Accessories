@@ -18,7 +18,11 @@ class AdminOrderDetailController extends Controller
      */
     public function index($id)
     {   $orderdetails=OrderDetail::with('product')->where('order_id',$id)->get();
-        return view('admin::orderdetail.index',compact('orderdetails'));
+        $total=0;
+        foreach ($orderdetails as $orderdetail) {
+            $total+=$orderdetail->quantity*$orderdetail->product->price;
+        }
+        return view('admin::orderdetail.index',compact('orderdetails','total'));
     }
 
     /**

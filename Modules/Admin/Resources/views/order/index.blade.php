@@ -30,6 +30,7 @@
                         <thead>
                             <tr class="text-info">
                                 <th>Id</th>
+                                <th>Code</th>
                                 <th><i class="fas fa-user mr-1"></i>Customer</th>
                                 <th><i class="fas fa-phone-square-alt mr-1"></i>Phone</th>
                                 <th><i class="fas fa-history mr-1"></i>Order Time</th>
@@ -41,6 +42,7 @@
                         <tfoot>
                             <tr class="text-info">
                                 <th>Id</th>
+                                <th>Code</th>
                                 <th>Customer</th>
                                 <th>Phone</th>
                                 <th>Order Time</th>
@@ -54,6 +56,7 @@
                            @foreach($orders as $order)
                                 <tr class="">
                                     <td class="text-center">{{$i}}</td>
+                                    <td class="text-center">{{$order->code}}</td>
                                     <td class="font-weight-bold text-muted">{{$order->user->name}}</td>
                                     <td class="text-left">{{$order->phone}}</td>
                                     <td>{{$order->created_at}}</td>

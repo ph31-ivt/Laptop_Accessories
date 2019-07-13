@@ -10,7 +10,7 @@ class Order extends Model
    use SoftDeletes;  
     protected $oders=['deleted_at']; 
     protected $fillable=[
-    	 'phone', 'address', 'total_price', 'status', 'user_id'
+    	'code', 'phone', 'address', 'total_price', 'status', 'user_id'
     ];
     public function user(){
     	return $this->belongsTo(User::class);

@@ -39,12 +39,17 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        // $userprofile=Userprofile::find($user->id)
+        //$userprofile=Userprofile::find($user->id)
         // $userprofile::delete();
         // $orderlist=Order::where('user_id',$user->id)->get();
         // //continue...
     }
-
+    public function deleting(User $user){
+         $userprofile=Userprofile::find($user->id)
+         $userprofile::delete();
+         $orderlist=Order::where('user_id',$user->id)->get();
+         //continue...
+    }
     /**
      * Handle the user "restored" event.
      *

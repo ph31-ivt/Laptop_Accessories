@@ -88,7 +88,7 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         $user= User::find($id);
-        // $user->delete();
+        $user->delete();
         return back()->with('msg','User: '.$user->name.' has been deleted')->with('attribute','warning');
         
     }

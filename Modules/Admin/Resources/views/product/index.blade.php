@@ -58,7 +58,7 @@
                                     <td class="text-center" id="product_id">{{$product->id}}</td>
                                     <td class="font-weight-bold text-muted" id="{{$product->id}}">{{$product->name}}</td>
                                     <td class="text-center"><img src="{{asset($product->main_image)}}" alt="failure" style="width: 60px; height: 60px;" class="img-circle {{$product->id}}"></td>
-                                    <td id="{{$product->price}}">{{number_format($product->price)}}</td>
+                                    <td id="{{$product->price}}">{{number_format($product->price)}} đ</td>
                                     <td class="text-center">{{$product->quantity}}</td>
                                     <td>{{$product->category->name}}</td>
                                     <td class="row">

@@ -81,7 +81,7 @@
                                 </div>
     							  <div class="form-group row col-md-12 justify-content-center">
     							    <button type="submit" class="rounded bg-info text-white form-control col-md-2 col-sm-12 mr-5">Update</button>
-    							    <a href="{{Route('admin.get.listcategory')}}" class="btn btn-secondary">cancel</a>
+    							    <a href="{{Route('admin.get.listcategory')}}" class="btn btn-secondary">Back</a>
     							  </div>
 							</form>
                         </div>

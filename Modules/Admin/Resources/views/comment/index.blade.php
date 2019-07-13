@@ -32,7 +32,8 @@
                             <tr class="text-info text-center">
                                 <th data-sortable="true">Id</th>
                                 <th>Customer</th>
-                                <th>tittle</th>
+                                <th>Tittle</th>
+                                <th>Rating</th>
                                 <th>Content</th>
                                 <th>Status</th>
                                 <th>Product</th>
@@ -44,6 +45,7 @@
                                 <th>Id</th>
                                 <th>Customer</th>
                                 <th>Tittle</th>
+                                <th>Rating</th>
                                 <th>Content</th>
                                 <th>Status</th>
                                 <th>Product</th>
@@ -56,6 +58,7 @@
                                 <td class="text-center" id="product_id">{{$comment->id}}</td>
                                 <td class="font-weight-bold text-muted">{{$comment->user->name}}</td>
                                 <td >{{$comment->title}}</td>
+                                <td class="text-center">{{$comment->rating}}</td>
                                 <td >{{$comment->content}}</td>
                                 @switch($comment->status)
                                 @case(0)

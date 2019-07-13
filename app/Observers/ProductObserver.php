@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Product;
 use App\ProductDetail;
+use App\Image;
 use Illuminate\Support\Facades\File;
 
 class ProductObserver
@@ -43,12 +44,25 @@ class ProductObserver
     // event deleting product====
     public function deleting(Product $product){
         $productdetails=ProductDetail::where('product_id',$product->id)->get();  
+        $old_img_path=$product->main_image;
+        //dd($old_img_path);
+        if(File::exists($old_img_path)){
+            //dd(true);
+            File::delete($old_img_path);
+        }
+        //dd(false);
         foreach ($productdetails as $productdetail) {
-            $old_img_path=$product->main_image;
-            if(File::exists($old_img_path)){
-                File::delete($old_img_path);
-            }
             $productdetail->delete();
+            $productdetail->forceDelete();
+        }
+        $images=Image::where('product_id',$product->id)->get();
+        foreach ($images as $image){
+            $image_path=$image->path;
+            if(File::exists($image_path)){
+                File::delete($image_path);
+            }
+            $image->delete();//softdelete images
+            $image->forceDelete();//remove images
         }
     }
     /**

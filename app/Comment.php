@@ -9,7 +9,7 @@ class Comment extends Model
     use SoftDeletes; 
     protected $comments=['deleted_at']; 
     protected $fillable=[
-    	 'title', 'content','status','user_id', 'product_id'
+    	 'title', 'content','rating','status','user_id', 'product_id'
     ]; 
     public function user(){
     	return $this->belongsTo(User::class);
