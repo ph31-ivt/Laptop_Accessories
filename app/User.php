@@ -20,7 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password'
     ];
-    public function comments(){
+
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
     /**
@@ -31,12 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function profile(){
-          return $this->hasOne(UserProfile::class);
-    }
-    public function orders(){
-        return $this->hasMany(Order::class);
-    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -45,7 +42,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function adminname(){
+
+    public function adminname()
+    {
         return $this->name;
     }
+
+    public function profile()   // khac nhau userprofile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
 }

@@ -7,27 +7,41 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-     use SoftDeletes;
-     protected $products=['deleted_at'];
-     protected $fillable=[
-    	'name', 'price', 'quantity','producer', 'product_type', 'status', 'category_id', 'description','main_image'
+    use SoftDeletes;
+
+    protected $products=['deleted_at'];
+    protected $table = 'products';
+    protected $fillable=[
+    	'name', 'price', 'quantity', 'producer', 'status', 'category_id', 'description','main_image'
     ];
-    public function category(){
+
+    public function category()
+    {
     	return $this->belongsTo(Category::class);
     }
-    public function productdetail(){
+
+    public function productdetail()
+    {
     	return $this->hasOne(ProductDetail::class);
     }
-    public function images(){
+
+    public function images()
+    {
     	return $this->hasMany(Image::class);
     }
-    public function orderdetail(){
+
+    public function orderdetail()
+    {
         return $this->hasOne(OrderDetail::class);
     }
-    public function promotions(){
+
+    public function promotions()    
+    {
         return $this->belongsToMany(Product::class);
     }
-    public function comments(){
+
+    public function comments()  
+    {
         return $this->hasMany(Comment::class);
     }
 }

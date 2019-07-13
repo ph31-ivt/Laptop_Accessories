@@ -9,10 +9,13 @@ class Promotion extends Model
 {
     use SoftDeletes;
     protected $promotions=['deleted_at'];
-     protected $fillable=[
-    	'name', 'discount'
+    protected $table = 'promotions';
+    protected $fillable=[
+    	'content'
     ];
-    public function products(){
+
+    public function products()
+    {
     	return $this->belongsMany(Product::class);
     }
 }

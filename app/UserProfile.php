@@ -9,10 +9,12 @@ class UserProfile extends Model
 {
     use SoftDeletes;
     protected $userprofiles=['deleted_at'];
+    protected $table = 'user_profiles';
     protected $fillable=[
-    	'phone', 'address', 'gender','avatar','user_id', 'role'
+    	'phone', 'address', 'gender','user_id', 'role'
     ];
-    public function user(){
+    public function user()
+    {
     	 return $this->belongsTo(User::class);
     }
 }

@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->integer('status')->default(0);
-            // $table->integer('rating');
+            $table->integer('rating');
             $table->integer('user_id');
             $table->integer('product_id');
             $table->timestamps();
