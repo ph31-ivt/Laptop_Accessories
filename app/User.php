@@ -18,11 +18,8 @@ class User extends Authenticatable
      */
     protected $users=['deleted_at'];
     protected $fillable = [
-        'name', 'email', 'password'
+        'fullname', 'email', 'password'
     ];
-    public function comments(){
-        return $this->hasMany(Comment::class);
-    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -31,12 +28,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function profile(){
-          return $this->hasOne(UserProfile::class);
-    }
-    public function orders(){
-        return $this->hasMany(Order::class);
-    }
     /**
      * The attributes that should be cast to native types.
      *
@@ -45,7 +36,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function adminname(){
-        return $this->name;
+
+    public function adminname()
+    {
+        return $this->fullname;
     }
+
+    public function profile()
+    {
+          return $this->hasOne(UserProfile::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
 }

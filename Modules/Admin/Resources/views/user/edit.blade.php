@@ -28,9 +28,9 @@
                 <div class="row">
                     <div class="col-md-7 col-sm-12">
                         <div class="form-group">
-                            <label for="name" class="text-info font-weight-bold">User Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{$user->name}}">
-                            <span class="text-warning font-weight-bold text-capatalizer">{{$errors->first('name')}}</span>
+                            <label for="fullname" class="text-info font-weight-bold">User Name</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="{{$user->fullname}}">
+                            <span class="text-warning font-weight-bold text-capatalizer">{{$errors->first('fullname')}}</span>
                         </div>
                         <div class="form-group">
                             <label for="email" class="text-info font-weight-bold" >Email</label>

@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
 {
-     use SoftDeletes; 
-      protected $properties=['deleted_at']; 
-      protected $fillable=[
+    use SoftDeletes; 
+    protected $properties=['deleted_at']; 
+    protected $table = 'properties';
+    protected $fillable=[
     	 'name', 'category_id'
     ]; 
-    public function category(){
+
+    public function category()
+    {
     	return $this->belongsTo(Category::class);
     }
 }

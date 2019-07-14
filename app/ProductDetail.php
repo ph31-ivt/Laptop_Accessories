@@ -8,16 +8,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ProductDetail extends Model
 {
     use SoftDeletes;
+
     protected $productdetails=['deleted_at'];
+    protected $table = 'product_details';
     protected $casts = [
         'properties' => 'array'
     ];
      protected $fillable=[
     	'properties', 'product_id'
     ];
-    public function product(){
+
+    public function product()
+    {
     	return $this->belongsTo(Product::class);
     }
+
     public function setPropertiesAttribute($value)
     {  
         $properties = [];

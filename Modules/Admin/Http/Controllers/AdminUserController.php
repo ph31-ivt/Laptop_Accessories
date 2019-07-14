@@ -17,7 +17,6 @@ class AdminUserController extends Controller
      */
     public function index()
     {   $userlist=User::All();
-        // dd($user);
         return view('admin::user.index',compact('userlist'));
     }
 
@@ -58,8 +57,7 @@ class AdminUserController extends Controller
     public function edit($id)
     {   $user=User::find($id);
         $profile=User::find($id)->profile;
-        //dd($profile);
-       return view('admin::user.edit',compact('profile', 'user'));
+        return view('admin::user.edit',compact('profile', 'user'));
     }
 
     /**
@@ -70,7 +68,7 @@ class AdminUserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-      $data=$request->only('name','email');
+      $data=$request->only('fullname','email');
       $user=User::find($id);
       $user->update($data);
       $data=$request->only('phone', 'address','gender', 'role');
@@ -89,7 +87,7 @@ class AdminUserController extends Controller
     {
         $user= User::find($id);
         $user->delete();
-        return back()->with('msg','User: '.$user->name.' has been deleted')->with('attribute','warning');
+        return back()->with('msg','User: '.$user->fullname.' has been deleted')->with('attribute','warning');
         
     }
 }

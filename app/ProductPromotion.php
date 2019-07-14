@@ -9,7 +9,8 @@ class ProductPromotion extends Model
 {
     use SoftDeletes;
     protected $productpromotions=['deleted_at'];
-     protected $fillable=[
+    protected $table = 'product_promotions';
+    protected $fillable=[
     	'product_id', 'promotion_id'
     ];
 }

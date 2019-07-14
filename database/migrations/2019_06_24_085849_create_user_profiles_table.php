@@ -18,7 +18,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('gender');
-            $table->integer('role');
+            $table->integer('role')->default(0);
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

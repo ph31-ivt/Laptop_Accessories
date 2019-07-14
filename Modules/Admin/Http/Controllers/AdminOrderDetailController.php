@@ -16,13 +16,16 @@ class AdminOrderDetailController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index($id)
-    {   $orderdetails=OrderDetail::with('product')->where('order_id',$id)->get();
+    public function index($id){   
+        $orderdetails=OrderDetail::with(array('product'=>function($query)
+        {
+            $query->withTrashed();
+        }))->where('order_id',$id)->get();
         $total=0;
         foreach ($orderdetails as $orderdetail) {
             $total+=$orderdetail->quantity*$orderdetail->product->price;
         }
-        return view('admin::orderdetail.index',compact('orderdetails','total'));
+        return view('admin::orderdetail.index',compact('orderdetails','total',));
     }
 
     /**
@@ -84,7 +87,6 @@ class AdminOrderDetailController extends Controller
         $orderdetaillist=OrderDetail::where('order_id', $order_id)->get();
         $linkexportproduct= new AdminProductController();
         $linkexportproduct->export($orderdetaillist);
-        //sdd($linkexportproduct);
     }
     public function destroy($id)
     {

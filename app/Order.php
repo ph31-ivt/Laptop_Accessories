@@ -7,15 +7,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-   use SoftDeletes;  
-    protected $oders=['deleted_at']; 
+    use SoftDeletes;  
+
+    protected $oders=['deleted_at'];
+    protected $table = 'orders'; 
     protected $fillable=[
-    	'code', 'phone', 'address', 'total_price', 'status', 'user_id'
+    	'code', 'fullname', 'phone', 'address', 'total_price', 'status', 'user_id'
     ];
-    public function user(){
+
+    public function user()
+    {
     	return $this->belongsTo(User::class);
     }
-    public function orderdetails(){
+
+    public function orderdetails()
+    {
     	return $this->hasMany(OrderDetail::class);
     }
 }

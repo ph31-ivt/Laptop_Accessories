@@ -28,7 +28,11 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin::category.create');
+        $listcategory=Category::where('parent_id',0)->get();
+        if(count($listcategory)==0){
+           $listcategory=array();
+        }
+        return view('admin::category.create',compact('listcategory'));
     }
 
     /**
@@ -38,26 +42,32 @@ class AdminCategoryController extends Controller
      */
     public function store(CreateCategory $request)
     {   
-        
+        $maxid=Category::max('id');
+        if($maxid==null){
+            $maxid=1;
+        }
+        else{
+           $maxid++; 
+        }
         $image=$request->file('icon');
-        $newname=time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+        $newname=$maxid.'.'.time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path("img/category"), $newname);
         $path='img/category/'.$newname;
-        $data=$request->only('name', 'group');
+        $data=$request->only('name', 'parent_id');
         $data['icon']=$path;
         Category::insert($data);
+        $id=Category::max('id');
         $data=$request->only('properties')['properties'];
-            $maxid=Category::max('id');
             for($i=0; $i<count($data); $i++){
               if($data[$i]!=null){
                 $properties[$i]['name']=$data[$i];
-                $properties[$i]['category_id']=$maxid;
+                $properties[$i]['category_id']=$id;
               } 
             }
         if(isset($properties)){
              Property::insert($properties);
             }
-        return redirect()->Route('admin.get.listcategory');
+        return back()->with('msg','Create category is successul')->with('attribute', 'success');
     }
 
     /**
@@ -76,10 +86,14 @@ class AdminCategoryController extends Controller
      * @return Response
      */
     public function edit($id)
-    {    
+    {   
         $category=Category::find($id);
+        $listcategory=Category::where('parent_id',0)->get();
+        if(count($listcategory)==0){
+           $listcategory=array();
+        }
         $propertylist=Property::where('category_id', $id)->get();
-        return view('admin::category.edit', compact('category','propertylist'));
+        return view('admin::category.edit', compact('category','propertylist','listcategory'));
     }
 
     /**
@@ -100,7 +114,7 @@ class AdminCategoryController extends Controller
             $newname=$id.'.'.time().'.'.$name->getClientOriginalExtension();
             $name->move(public_path("img/category"), $newname);
             $path='img/category/'.$newname;
-            $data=$request->only('name');
+            $data=$request->only('name','parent_id');
             $data['icon']=$path;
             $category=Category::find($id);
             $category->update($data);
@@ -109,6 +123,7 @@ class AdminCategoryController extends Controller
        else{
              $category=Category::find($id);
              $category->name=$request->only('name')['name'];
+             $category->parent_id=$request->only('parent_id')['parent_id'];
              $category->save();
        }
        //

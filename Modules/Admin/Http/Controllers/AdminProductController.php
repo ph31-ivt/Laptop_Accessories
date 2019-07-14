@@ -46,8 +46,16 @@ class AdminProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {   
+
+        $maxid=Product::max('id');
+        if($maxid==null){
+            $maxid=1;
+        }
+        else{
+            $maxid++; 
+        }
         $image=$request->file('main_image');
-        $newname=time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+        $newname=$maxid.'.'.time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path("img/product"), $newname);
         $path='img/product/'.$newname;
         $data=$request->except('_token');

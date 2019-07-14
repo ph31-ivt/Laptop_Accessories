@@ -51,11 +51,6 @@
                             <input type="text" class="form-control" id="producer" name="producer" placeholder="Number of product" value="{{$product->producer}}">
                             <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('producer')}}</span>
                         </div>
-                        <div class="form-group">
-                            <label for="product_type" class="text-info font-weight-bold"><i class="fas fa-code-branch mr-2"></i>Product type<span class="text-danger ml-1">&#42;</span></label>
-                            <input type="text" class="form-control" id="product_type" name="product_type" placeholder="Fill type for product" value="{{$product->product_type}}">
-                            <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('product_type')}}</span>
-                        </div>
                     </div>
                     <!--  -->
                     <!--  -->
@@ -99,8 +94,6 @@
                         </div>
                     </div>
                     <!--  -->
-                    <!--  -->
-                 
                     <div class="col-md-5 col-sm-12">
                         <div>
                             <label class="text-info font-weight-bold"><i class="fas fa-info-circle mr-2"></i>Change detail information<span class="text-danger ml-1">&#42;</span></label>

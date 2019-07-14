@@ -41,7 +41,7 @@
                         </thead>
                         <tfoot>
                             <tr class="text-info">
-                                <th>Id</th>
+                                <th>NO.</th>
                                 <th>Code</th>
                                 <th>Customer</th>
                                 <th>Phone</th>
@@ -57,7 +57,7 @@
                                 <tr class="">
                                     <td class="text-center">{{$i}}</td>
                                     <td class="text-center">{{$order->code}}</td>
-                                    <td class="font-weight-bold text-muted">{{$order->user->name}}</td>
+                                    <td class="font-weight-bold text-muted">{{$order->user->fullname}}</td>
                                     <td class="text-left">{{$order->phone}}</td>
                                     <td>{{$order->created_at}}</td>
                                      @switch($order->status)
@@ -76,11 +76,10 @@
                                             @endswitch
                                         <td class="text-center">{{number_format($order->total_price)}}</td>
                                         <td class="row">
-                                        <a href="{{Route('check-order',[$order->id,1])}}" class="btn btn-info btn-sm ml-4" title="approve" onclick="return confirm('Do you want to approve this order!')"><i class="fas fa-thumbs-up"></i></a>
-                                        <a href="{{Route('check-order',[$order->id,2])}}" class="btn btn-info btn-sm ml-1" title="approve" onclick="return confirm('Do you want to pay this order!')"><i class="far fa-check-circle"></i></a>
+                                        <a href="{{Route('check-order',[$order->id,1])}}" class="btn btn-info btn-sm ml-4" title="pass" onclick="return confirm('Do you want to pass this order!')"><i class="fas fa-thumbs-up"></i></a>
+                                        <a href="{{Route('check-order',[$order->id,2])}}" class="btn btn-info btn-sm ml-1" title="pay" onclick="return confirm('Do you want to pay this order!')"><i class="far fa-check-circle"></i></a>
                                         <a href="{{Route('get-order-detail', $order->id)}}" class="btn btn-info btn-sm ml-1" title="show detail "><i class="far fa-file-alt"></i></a>
                                         <a href="{{Route('check-order',[$order->id,3])}}" class="btn btn-danger btn-sm ml-1" title="cancel order" onclick="return confirm('Do you want to Cancel this order!')"><i class="fas fa-window-close"></i></a>
-                                        
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

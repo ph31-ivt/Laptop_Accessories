@@ -20,7 +20,6 @@ class AdminOrderController extends Controller
         $orders=Order::with('user')->get();
         return view('admin::order.index', compact('orders'));
     }
-
     /**
      * Show the form for creating a new resource.
      * @return Response
