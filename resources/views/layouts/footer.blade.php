@@ -66,7 +66,7 @@
                          </div>
                          <div class="newsletter-box">
                              <form action="#">
-                                  <input class="subscribe" placeholder="your email address" name="email" id="subscribe" type="text">
+                                  <input class="subscribe" placeholder="Địa chỉ email của bạn" name="email" id="subscribe" type="text">
                                   <button type="submit" class="submit">Đăng ký!</button>
                              </form>
                          </div>
@@ -77,66 +77,46 @@
                     <!-- Single Footer Start -->
                     <div class="col-lg-2 col-md-4 col-sm-6">
                         <div class="single-footer mb-sm-40">
-                            <h3 class="footer-title">Information</h3>
+                            <h3 class="footer-title">Thông tin chung</h3>
                             <div class="footer-content">
                                 <ul class="footer-list">
-                                    <li><a href="about.html">About Us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="contact.html">Terms & Conditions</a></li>
-                                    <li><a href="login.html">FAQs</a></li>
-                                    <li><a href="login.html">Return Policy</a></li>
+                                    <li><a href="{{route('about')}}">Thông tin về cửa hàng</a></li>
+                                    <li><a href="#">Thông tin tuyển dụng</a></li>
+                                    <li><a href="#">Tin tức</a></li>
+                                    <li><a href="#">Tin khuyến mãi</a></li>
+                                    <li><a href="{{route('contact')}}">Liên hệ góp ý</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <!-- Single Footer Start -->
                     <!-- Single Footer Start -->
-                    <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
                         <div class="single-footer mb-sm-40">
-                            <h3 class="footer-title">Customer Service</h3>
+                            <h3 class="footer-title">Hỗ trợ khách hàng</h3>
                             <div class="footer-content">
                                 <ul class="footer-list">
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="#">Site Map</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
+                                    <li><a href="#">Tìm hiểu về mua trả góp</a></li>
+                                    <li><a href="#">Chính sách vận chuyển</a></li>
+                                    <li><a href="#">Chính sách, quy định chung</a></li>
+                                    <li><a href="#">Chính sách bảo hành</a></li>
+                                    <li><a href="#">Chính sách đổi trả lại hàng</a></li>
+                                    <li><a href="#">Bảo mật thông tin khách hàng</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <!-- Single Footer Start -->
                     <!-- Single Footer Start -->
-                    <div class="col-lg-2 col-md-4 col-sm-6">
+                    <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="single-footer mb-sm-40">
-                            <h3 class="footer-title">Extras</h3>
+                            <h3 class="footer-title">Hỗ trợ mua hàng</h3>
                             <div class="footer-content">
                                 <ul class="footer-list">
-                                    <li><a href="#">Newsletter</a></li>
-                                    <li><a href="#">Brands</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="#">Site Map</a></li>      
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single Footer Start -->
-                    <!-- Single Footer Start -->
-                    <div class="col-lg-2 col-md-4 col-sm-6">
-                        <div class="single-footer mb-sm-40">
-                            <h3 class="footer-title">My Account</h3>
-                            <div class="footer-content">
-                                <ul class="footer-list">
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Returns</a></li>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="wishlist.html">Wish List</a></li>
-                                    <li><a href="#">Newsletter</a></li>
+                                    <li><a href="#">Gọi mua hàng: (0236)3 888 000</a></li>
+                                    <li><a href="#">Gọi TV trả góp: (0236)3 888 000</a></li>
+                                    <li><a href="#">Gọi bảo hành: (0236)3 655 000</a></li>
+                                    <li><a href="#">Gọi kỹ thuật: (0236)3 872 000</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -145,13 +125,13 @@
                     <!-- Single Footer Start -->
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-footer mb-sm-40">
-                            <h3 class="footer-title">My Account</h3>
+                            <h3 class="footer-title">Địa chỉ cửa hàng</h3>
                             <div class="footer-content">
                                 <ul class="footer-list address-content">
-                                    <li><i class="lnr lnr-map-marker"></i> Address: 169-C, Technohub, Dubai Silicon Oasis.</li>
-                                    <li><i class="lnr lnr-envelope"></i><a href="#"> mail Us: Support@truemart.com </a></li>
+                                    <li><i class="lnr lnr-map-marker"></i> Địa chỉ: 52 Nguyễn Văn Linh, Quận Hải Châu, Tp.ĐN.</li>
+                                    <li><i class="lnr lnr-envelope"></i><a href="#"> Email: phuhx193@gmail.com </a></li>
                                     <li>
-                                        <i class="lnr lnr-phone-handset"></i> Phone: (+800) 123 456 789)
+                                        <i class="lnr lnr-phone-handset"></i> Điện thoại: (0236) 3 888 000
                                     </li>
                                 </ul>
                                 <div class="payment mt-25 bdr-top pt-30">

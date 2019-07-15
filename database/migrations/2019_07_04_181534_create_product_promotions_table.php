@@ -13,7 +13,7 @@ class CreateProductPromotionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_promotions', function (Blueprint $table) {
+        Schema::create('product_promotion', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('product_id');
             $table->integer('promotion_id');

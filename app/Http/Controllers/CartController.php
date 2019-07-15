@@ -18,13 +18,12 @@ class CartController extends Controller
     {
         $data = $request->only('qty');
         $products = Product::find($id);
-        $image = $products->image->first()->name;
         if (isset($data['qty'])) {
             $qty = $data['qty'];
         }else{
             $qty = 1;
         }
-        $cart = ['id'=>$products->id,'name'=>$products->name,'qty'=>$qty,'price'=>$products->price,'weight' => 1,'options'=>['image'=>$image]];
+        $cart = ['id'=>$products->id,'name'=>$products->name,'qty'=>$qty,'price'=>$products->price,'weight' => 1,'options'=>['image'=>$products->main_image,'maxqty'=>$products->quantity]];
         \Cart::instance('cart')->add($cart);
         return back()->with(['flast'=>'success','alert-message'=>'Đã thêm một sản phẩm vào giỏ hàng']);
     }
@@ -45,8 +44,7 @@ class CartController extends Controller
     public function addWishlist($id)
     {
         $products = Product::find($id);
-        $image = $products->image->first()->name;
-        $wishlist = ['id'=>$products->id,'name'=>$products->name,'qty'=>$products->quantity,'price'=>$products->price,'weight' => 1,'options'=>['image'=>$image,'description'=>$products->description]];
+        $wishlist = ['id'=>$products->id,'name'=>$products->name,'qty'=>$products->quantity,'price'=>$products->price,'weight' => 1,'options'=>['image'=>$products->main_image,'description'=>$products->description]];
         \Cart::instance('wishlist')->add($wishlist);
         return back()->with(['flast'=>'success','alert-message'=>'Thêm vào danh sách yêu thích thành công.']);
     }
@@ -57,12 +55,10 @@ class CartController extends Controller
         {
             $this->validate($request,
                 [
-                    'email'=>'unique:users,email',
                     'password'=>'required|min:8|max:15',
                     're_password'=>'required|same:password'
                 ],
                 [
-                    'email.unique'=>'Email này đã tồn tại',
                     'password.required'=>'Vui lòng nhập password của bạn',
                     'password.min'=>'Vui lòng nhập ít nhất 8 ký tự',
                     'password.max'=>'Vui lòng nhập không quá 15 ký tự',
@@ -77,7 +73,7 @@ class CartController extends Controller
             $user->password = bcrypt($request->password);
             $user->save();
             \Auth::attempt(['email'=>$request->email,'password'=>$request->password]);
-            $userprofile = new Userprofile();
+            $userprofile = new UserProfile();
             $userprofile->phone = $request->phone;
             $userprofile->address = $request->address;
             $userprofile->gender = $request->gender;
@@ -85,7 +81,8 @@ class CartController extends Controller
             $userprofile->save();
             // tao database order
             $order = new Order();
-            $order->code_order = $user->id.'.'.str_random(4).'.'.rand(0,100);
+            $order->code = $user->id.'.'.str_random(4).'.'.rand(0,100);
+            $order->fullname = $userprofile->fullname;
             $order->phone = $userprofile->phone;
             $order->address = $userprofile->address;
             $order->total_price = \Cart::instance('cart')->total(0,',','');
@@ -94,8 +91,8 @@ class CartController extends Controller
             $order->save();
         }else
         {
-            if (\Auth::check()&&!(\Auth::user()->userprofile)) {  // kiem tra dang nhap va ton tai thong tin tai khoan chua
-                $userprofile = new Userprofile();
+            if (\Auth::check()&&!(\Auth::user()->profile)) {  // kiem tra dang nhap va ton tai thong tin tai khoan chua
+                $userprofile = new UserProfile();
                 $userprofile->phone = $request->phone;
                 $userprofile->address = $request->address;
                 $userprofile->gender = $request->gender;
@@ -106,12 +103,13 @@ class CartController extends Controller
             }
             // tao database order
             $order = new Order();
-            $order->code_order = \Auth::user()->id.'.'.str_random(4).'.'.rand(0,100);
+            $order->code = \Auth::user()->id.'.'.str_random(4).'.'.rand(0,100);
+            $order->fullname = $request->fullname;
             $order->phone = $request->phone;
             $order->address = $request->address;
             $order->total_price = \Cart::instance('cart')->total(0,',','');
             $order->status = 0;
-            $order->user_id = \Auth::check()?\Auth::user()->id:'';
+            $order->user_id = \Auth::user()->id;
             $order->save();
         }
         
@@ -138,14 +136,13 @@ class CartController extends Controller
 
     public function orderDetail($id)
     {
-        $orderdetails = Orderdetail::with('product')->where('order_id',$id)->get();
+        $orderdetails = OrderDetail::with('product')->where('order_id',$id)->get();
         $product_id = $orderdetails->pluck('product_id');
-        $images = Image::whereIn('product_id',$product_id)->get();
         foreach($orderdetails as $od) { ?>
             <tr class="cart_item">
                 <td class="product-img " style="width: 100px;">
                     <a href="<?php echo url('product-detail',$od->product_id)?>">
-                        <img class="primary-img img-small" src="<?php echo url('img/products/'.$images->where('product_id',$od->product_id)->first()->name)?>" alt="single-product">
+                        <img class="primary-img img-small" src="<?php echo url($od->main_image)?>" alt="single-product">
                     </a>
                 </td>
                 <td class="product-name text-left">
@@ -168,11 +165,11 @@ class CartController extends Controller
     {
         $order = Order::find($request->id);
         if($order->status>0){
-            return back()->with(['flast'=>'danger','alert-message'=>'Không thể hủy đơn hàng này']);
+            return "<p>Không thể hủy đơn hàng này</p>";
         }else{
             $order->status = 3;
             $order->save();
-            return back()->with(['flast'=>'success','alert-message'=>'Hủy thành công']);
+            return "<p>Hủy thành công</p>";
         }
     }
 }

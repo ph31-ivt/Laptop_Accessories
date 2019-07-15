@@ -18,13 +18,9 @@ class User extends Authenticatable
      */
     protected $users=['deleted_at'];
     protected $fillable = [
-        'name', 'email', 'password'
+        'fullname', 'email', 'password'
     ];
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -45,7 +41,7 @@ class User extends Authenticatable
 
     public function adminname()
     {
-        return $this->name;
+        return $this->fullname;
     }
 
     public function profile()   // khac nhau userprofile()

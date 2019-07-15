@@ -54,7 +54,7 @@
                                 <tr>
                                     <td colspan="2" align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#666666;padding:10px 10px 20px 15px;line-height:17px"> 
                                         <b>Mã đơn hàng của bạn #</b> 
-                                        <a href="#" style="color:#ed2324;font-weight:bold;text-decoration:none" target="_blank">{{$order->code_order}}
+                                        <a href="#" style="color:#ed2324;font-weight:bold;text-decoration:none" target="_blank">{{$order->order}}
                                         </a>
                                         <span style="font-size:12px">{{stristr($order->created_at,' ',true)}}</span>
                                     </td>
@@ -81,7 +81,7 @@
                                                     </td>
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-bottom:5px">:</td>
                                                     <td align="left" valign="top" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:20px;padding-left:10px;padding-bottom:5px"> 
-                                                        <b>{{$order->user->fullname}}</b> -  {{$order->phone}}
+                                                        <b>{{$order->fullname}}</b> -  {{$order->phone}}
                                                         <br>
                                                         {{$order->address}}
                                                     </td>

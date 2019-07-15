@@ -90,6 +90,9 @@ Route::group(['prefix'=>'shopping'],function(){
 
 });
 
+Route::get('vidu/{mk}',function($mk){
+  dd(Hash::check($mk, \Auth::user()->password));
+});
 
 
 // Route::get('/', function () {

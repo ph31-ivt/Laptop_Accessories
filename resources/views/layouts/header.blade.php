@@ -35,7 +35,7 @@
                 <!-- Header Top Start -->
                 <div class="header-top">
                     <ul>
-                        <li><a href="{{route('checkout')}}">{{Cart::instance('cart')->count()>0?'Thanh toán':''}}</a></li>
+                        <li><a href="{{route('checkout')}}">{{Cart::instance('cart')->count()>0?'Đặt Hàng':''}}</a></li>
                     </ul>
                     <ul>                                          
                         <li><a href="#" class="pr-10">{{ isset(Auth::user()->fullname)?Auth::user()->fullname:'Tài khoản' }}</a><i class="caret"></i><i class="lnr lnr-chevron-down"></i>
@@ -70,7 +70,7 @@
                     <!-- Categorie Search Box Start Here -->
                     <div class="col-lg-6 col-md-8 ml-auto mr-auto col-10">
                         <div class="categorie-search-box">
-                            <form action="{{route('search.post')}}" method="post">
+                            <form action="{{route('search.post')}}" autocomplete="off"  method="post">
                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                 <div class="form-group">
                                     <select class="bootstrap-select" name="category">
@@ -107,7 +107,7 @@
                                             <!-- Cart Box Start -->
                                             <div class="single-cart-box">
                                                 <div class="cart-img">
-                                                    <a href="{{route('product-detail',$value->id)}}"><img src="{{asset('img/products/'.$value->options->image)}}" alt="cart-image"></a>
+                                                    <a href="{{route('product-detail',$value->id)}}"><img src="{{asset($value->options['image'])}}" alt="cart-image"></a>
                                                     <span class="pro-quantity">{{$value->qty}}</span>
                                                 </div>
                                                 <div class="cart-content">
@@ -124,7 +124,7 @@
                                                    <li> <strong>Tổng tiền</strong> <span class="amount">{{Cart::instance('cart')->subtotal(0,',','.')}} đ</span></li>
                                                </ul>
                                                 <div class="cart-actions text-center">
-                                                    <a class="cart-checkout" href="{{route('checkout')}}">Thanh toán</a>
+                                                    <a class="cart-checkout" href="{{route('checkout')}}">Đặt Hàng</a>
                                                 </div>
                                             </div>
                                             <!-- Cart Footer Inner End -->
@@ -135,7 +135,7 @@
                                 @foreach($wishlist as $value)
                                     <?php $number_wishlist++ ?>
                                 @endforeach
-                                <li><a href="{{route('wishlist')}}"><i class="lnr lnr-heart"></i><span class="my-cart"><span>Wish list <span class="wish-list">{{$number_wishlist}}</span></span></span></a>
+                                <li><a href="{{route('wishlist')}}"><i class="lnr lnr-heart"></i><span class="my-cart"><span>Yêu thích<span class="wish-list">{{$number_wishlist}}</span></span></span></a>
                                 </li>
 
                             </ul>
@@ -182,14 +182,14 @@
                         <nav>
                             <ul class="vertical-menu-list">
                                 @foreach($categories->where('parent_id',0) as $ct)
-                                    <li><a href="{{route('product.get',1)}}"><span><img src="{{asset('img/vertical-menu/'.$ct->incon)}}" alt="menu-icon"></span>{{$ct->name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    <li><a href="{{route('product.get',1)}}"><span><img src="{{asset('img/vertical-menu/'.$ct->icon)}}" alt="menu-icon"></span>{{$ct->name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                         <!-- Vertical Mega-Menu Start -->
                                         <ul class="ht-dropdown megamenu first-megamenu">
                                             <!-- Single Column Start -->
                                             <li class="single-megamenu">
                                                 <ul>
                                                     <li class="menu-tile"><strong>THƯƠNG HIỆU</strong></li>
-                                                    @foreach($ct->product->groupBy('producer') as $key=>$producer)
+                                                    @foreach($ct->products->groupBy('producer') as $key=>$producer)
                                                         <li><a href="shop.html">{{$key}}</a></li>
                                                     @endforeach
                                                 </ul>

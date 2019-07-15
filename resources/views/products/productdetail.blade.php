@@ -28,10 +28,13 @@
                 <div class="col-lg-5 mb-all-40">
                     <!-- Thumbnail Large Image start -->
                     <div class="tab-content">
-                        <?php $count=0; ?>
+                        <div id="thumb0" class="tab-pane fade show active">
+                            <a data-fancybox="images" href="{{asset('img/products/'.$products->main_image)}}"><img src="{{asset($products->main_image)}}" alt="product-view"></a>
+                        </div>
+                        <?php $count=1; ?>
                         @foreach($images->where('product_id',$products->id) as $ig)
-                            <div id="thumb{{$count}}" class="tab-pane fade {{$count==0?'show active':''}}">
-                                <a data-fancybox="images" href="{{asset('img/products/'.$ig->name)}}"><img src="{{asset('img/products/'.$ig->name)}}" alt="product-view"></a>
+                            <div id="thumb{{$count}}" class="tab-pane fade }}">
+                                <a data-fancybox="images" href="{{asset('img/products/'.$ig->path)}}"><img src="{{asset('img/products/'.$ig->path)}}" alt="product-view"></a>
                             </div>
                             <?php $count++; ?>
                         @endforeach
@@ -40,9 +43,9 @@
                     <!-- Thumbnail Image End -->
                     <div class="product-thumbnail mt-15">
                         <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
-                            <?php $count=0; ?>
+                            <?php $count=1; ?>
                             @foreach($images->where('product_id',$products->id) as $ig)
-                                <a class="{{$count==0?'active':''}}" data-toggle="tab" href="#thumb{{$count}}"><img src="{{asset('img/products/'.$ig->name)}}" alt="product-thumbnail">
+                                <a class="{{$count==0?'active':''}}" data-toggle="tab" href="#thumb{{$count}}"><img src="{{asset('img/products/'.$ig->path)}}" alt="product-thumbnail">
                                 <?php $count++; ?></a>
                             @endforeach
                         </div>
@@ -72,7 +75,7 @@
                             </div>
                             <div class="body-promotion">
                                 <ul class="promotion-detail" >
-                                    @foreach($products->promotion as $km)
+                                    @foreach($products->promotions as $km)
                                         <li><span class="in-stock"><i class="lnr lnr-tag"></i>{{$km->content}}</span></li>
                                     @endforeach
                                 </ul>
@@ -112,8 +115,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <ul class="main-thumb-desc nav tabs-area" role="tablist">
-                    <li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
-                    <li><a data-toggle="tab" href="#review">Reviews 1</a></li>
+                    <li><a class="active" data-toggle="tab" href="#dtail">Thông Số kỹ thuật</a></li>
+                    <li><a data-toggle="tab" href="#review">Đánh Giá </a></li>
                 </ul>
                 <!-- Product Thumbnail Tab Content Start -->
                 <div class="tab-content thumb-content border-default">
@@ -125,10 +128,10 @@
                                 </div>
                                 <table class="table digital">
                                     <tbody>
-                                        @foreach($productdetail as $pd)
+                                        @foreach($products->productdetail as $pd)
                                             <tr>
-                                                <th style="width: 150px;"><p><strong>{{$pd->feature}}</strong></p></th>
-                                                <td><p>{{$pd->describe}}</p></td>
+                                                <th style="width: 150px;"><p><strong>{{$pd['key']}}</strong></p></th>
+                                                <td><p>{{$pd['value']}}</p></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -245,7 +248,7 @@
                     <!-- Product Image Start -->
                     <div class="pro-img">
                         <a href="{{route('product-detail',$rp->id)}}">
-                            <img class="primary-img" src="{{asset('img/products/'.$images->where('product_id',$rp->id)->first()->name)}}" alt="single-product">
+                            <img class="primary-img" src="{{asset($rp->main_image)}}" alt="single-product">
                         </a>
                         <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View" ><i class="lnr lnr-magnifier"></i></a>
                         <input type="hidden" value="{{$rp->id}}">

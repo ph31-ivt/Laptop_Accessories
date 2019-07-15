@@ -12,7 +12,7 @@ class Order extends Model
     protected $oders=['deleted_at']; 
     protected $table = 'orders';
     protected $fillable=[
-    	'code','phone', 'address', 'total_price', 'status', 'user_id'
+    	'code','fullname','phone', 'address', 'total_price', 'status', 'user_id'
     ];
 
     public function user()

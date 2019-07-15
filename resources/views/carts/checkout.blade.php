@@ -45,14 +45,14 @@
                                     <label>Giới tính</label>
                                 </div>
                                 <div>
-	                                <label  class="checkbox-inline" for="nam"><input type="radio" name="gender" value="nam" id="nam" {{Auth::check()?Auth::user()->userprofile?Auth::user()->userprofile->gender=='nam'?'checked':'':'':'checked'}} /> Nam</label>
-	                            	<label class="checkbox-inline ml-15" for="nu"><input type="radio" name="gender" value="nu" id="nu" {{Auth::check()?Auth::user()->userprofile?Auth::user()->userprofile->gender=='nu'?'checked':'':'':''}}  /> Nữ</label>
+	                                <label  class="checkbox-inline" for="nam"><input type="radio" name="gender" value="nam" id="nam" {{Auth::check()?Auth::user()->profile?Auth::user()->profile->gender=='nam'?'checked':'':'':'checked'}} /> Nam</label>
+	                            	<label class="checkbox-inline ml-15" for="nu"><input type="radio" name="gender" value="nu" id="nu" {{Auth::check()?Auth::user()->profile?Auth::user()->profile->gender=='nu'?'checked':'':'':''}}  /> Nữ</label>
                             	</div>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
                                     <label>Địa chỉ <span class="required">*</span></label>
-                                    <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ" value="{{Auth::check()?Auth::user()->userprofile?Auth::user()->userprofile->address:old('address'):old('address')}}"/>
+                                    <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ" value="{{Auth::check()?Auth::user()->profile?Auth::user()->profile->address:old('address'):old('address')}}"/>
                                     @if($errors->has('address'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('address') }}</strong>
@@ -63,7 +63,7 @@
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
                                     <label>Email <span class="required">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="Nhập địa chỉ Email" value="{{Auth::check()?Auth::user()->email:old('email')}}" />
+                                    <input type="email" class="form-control" name="email" placeholder="Nhập địa chỉ Email" value="{{Auth::check()?Auth::user()->email:old('email')}}" {{Auth::check()?'readonly':''}} />
                                     @if($errors->has('email'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('email') }}</strong>
@@ -74,7 +74,7 @@
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
                                     <label>Sô điện thoại  <span class="required">*</span></label>
-                                    <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại của bạn" value="{{Auth::check()?Auth::user()->userprofile?Auth::user()->userprofile->phone:old('phone'):old('phone')}}"/>
+                                    <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại của bạn" value="{{Auth::check()?Auth::user()->profile?Auth::user()->profile->phone:old('phone'):old('phone')}}"/>
                                     @if($errors->has('phone'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('phone') }}</strong>
@@ -109,9 +109,9 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(Auth::check())
+                            @if(Auth::check()&&Auth::user()->profile)
                             <div class="col-md-12">
-                                <p>Nếu thông tin tài khoản của bạn không chính xác thì hãy <a href="{{route('profile.get',Auth::user()->id)}}">Thay đổi thông tin tài khoản</a></p>
+                                <p >Nếu thông tin tài khoản của bạn không chính xác thì hãy <a href="{{route('user.profile.get',Auth::user()->id)}}">Thay đổi thông tin tài khoản</a></p>
                             </div>
                             @endif
                             <div class="js-message alert alert-danger fade hidden">

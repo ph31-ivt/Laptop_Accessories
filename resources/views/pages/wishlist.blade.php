@@ -10,8 +10,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <ul class="d-flex align-items-center">
-                        <li><a href="{{route('home')}}">Home</a></li>
-                        <li class="active"><a href="{{route('wishlist')}}">Wishlist</a></li>
+                        <li><a href="{{route('home')}}">Trang chủ</a></li>
+                        <li class="active"><a href="{{route('wishlist')}}">Danh sách yêu thích</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                     <tr>
                                         <td class="product-remove"> <a href="{{route('wishlist.remove',$list->rowId)}}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                         <td class="product-thumbnail">
-                                            <a href="#"><img src="{{asset('img/products/'.$list->options->image)}}" alt="cart-image" /></a>
+                                            <a href="#"><img src="{{'../'.$list->options['image']}}" alt="cart-image" /></a>
                                         </td>
                                         <td class="product-name"><a href="#">{{$list->name}}</a></td>
                                         <td class="product-description"><span>{{$list->options->description}}</span></td>

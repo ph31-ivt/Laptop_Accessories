@@ -45,11 +45,11 @@
                                 <tr>
                                 	<input type="hidden" name="{{$count}}[]" value="{{$key}}">
                                     <td class="product-thumbnail">
-                                        <a href="{{route('product-detail',$ca->id)}}"><img src="{{asset('img/products/'.$ca->options->image)}}" alt="cart-image" /></a>
+                                        <a href="{{route('product-detail',$ca->id)}}"><img src="{{'../'.$ca->options['image']}}" alt="cart-image" /></a>
                                     </td>
                                     <td class="product-name"><a href="{{route('product-detail',$ca->id)}}">{{$ca->name}}</a></td>
                                     <td class="product-price"><span class="amount text-danger">{{number_format( $ca->price ,0 , "," ,"." )}} đ</span></td>
-                                    <td class="product-quantity"><input type="number" name="{{$count}}[]" value="{{$ca->qty}}" /></td>
+                                    <td class="product-quantity"><input type="number" name="{{$count}}[]" value="{{$ca->qty}}" max="{{$ca->options['maxqty']}}" /></td>
                                     <td class="product-subtotal text-danger">{{number_format ( ($ca->price*$ca->qty) ,0 , "," ,"." )}} đ</p></td>
                                     <td class="product-remove"> <a href="{{route('cart.remove',$key)}}"><i class="fa fa-times" aria-hidden="true"></i></a></td>
                                     <?php $count++; ?>
@@ -84,7 +84,7 @@
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="{{route('checkout')}}">Thanh toán</a>
+                                    <a href="{{route('checkout')}}">Đặt Hàng</a>
                                 </div>
                             </div>
                         </div>

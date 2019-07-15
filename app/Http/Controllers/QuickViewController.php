@@ -19,9 +19,9 @@ class QuickViewController extends Controller
                 <!-- Thumbnail Large Image start -->
                 <div class="tab-content">
                     <?php $count=0; ?>
-                    <?php foreach($images->where('product_id',$products->id) as $ig){?>
+                    <?php foreach($images as $ig){?>
                         <div id="thumb-<?php echo $count?>" class="tab-pane fade <?php echo $count==0?'show active':''?>">
-                            <a data-fancybox="images" href="<?php echo url('img/products/'.$ig->name)?>"><img src="<?php echo url('img/products/'.$ig->name)?>" alt="product-view"></a>
+                            <a data-fancybox="images" href="<?php echo asset('../img/products/'.$ig->path)?>"><img src="<?php echo asset('../img/products/'.$ig->path)?>" alt="product-view"></a>
                         </div>
                         <?php  $count++; ?>
                     <?php }?>
@@ -51,7 +51,7 @@ class QuickViewController extends Controller
                         </div>
                         <div class="body-promotion">
                             <ul class="promotion-detail" >
-                                <?php foreach($products->promotion as $km) {?>
+                                <?php foreach($products->promotions as $km) {?>
                                     <li><span class="in-stock"><i class="lnr lnr-tag"></i><?php echo $km->content?></span></li>
                                 <?php }?>
                             </ul>

@@ -15,13 +15,18 @@ class SearchController extends Controller
     		$category = Category::pluck('id');
     		$searchs = Product::whereIn('category_id',$category)->where('name','Like','%'.$request->key.'%')->get();
     	}else{
-    		$searchs = Product::where('category_id',$request->option)->where('name','Like' ,'%'.$request->key.'%')->get();
+            $categories = Category::where('parent_id',$request->option)->pluck('id');
+            if (count($categories)) {
+                $searchs = Product::whereIn('category_id',$categories)->where('name','Like' ,'%'.$request->key.'%')->get();
+            }else{
+                $searchs = Product::where('category_id',$request->option)->where('name','Like' ,'%'.$request->key.'%')->get();
+            }
     	}
         $images = Image::all();
     	foreach($searchs as $se)
     	{
 		   ?><li class="item-search">
-                <a class="p-img" href="<?php echo route('product-detail',$se->id) ?> "><img src="<?php echo url('img/products/'.$images->where('product_id',$se->id)->first()->name) ?>" alt=""></a>
+                <a class="p-img" href="<?php echo route('product-detail',$se->id) ?> "><img src="<?php echo '../'.$se->main_image  ?>" alt=""></a>
                 <a class="p-name" href="<?php echo route('product-detail',$se->id) ?>"><?php echo $se->name ?></a>
             </li>
             <?php
@@ -34,19 +39,19 @@ class SearchController extends Controller
 
     	if ($request->category == '0') {
     		$category = Category::pluck('id');
-    		$products = Product::whereIn('category_id',$category)->where('name','Like','%'.$request->search.'%')->get();
+    		$products = Product::whereIn('category_id',$category)->where('name','Like','%'.$request->search.'%')->paginate(12);
             $top_products = Product::whereIn('category_id',$category)->where('status',1)->take(4)->get();
             $producer = Product::select('producer')->whereIn('category_id',$category)->where('name','Like','%'.$request->search.'%')->groupBy('producer')->get();
     	}else{
             $category = $request->category;
-    		$products = Product::where('category_id',(int)$request->category)->where('name','Like','%'.$request->search.'%')->get();
+    		$products = Product::where('category_id',(int)$request->category)->where('name','Like','%'.$request->search.'%')->paginate(12);
             $top_products = Product::where('category_id',(int)$request->category)->where('status',1)->take(4)->get();
             $producer = Product::select('producer')->where('category_id',(int)$request->category)->where('name','Like','%'.$request->search.'%')->groupBy('producer')->get();
     	}
         $category_rp = $request->category;
         $search = $request->search;
         $images = Image::all();
-    	return view('pages.product',compact('products','top_products','images','producer','category_rp','search'));
+    	return view('products.product',compact('products','top_products','images','producer','category_rp','search'));
     }
 
     public function fill(Request $request)
@@ -85,7 +90,6 @@ class SearchController extends Controller
                 }
             }
         }
-        $images = Image::all();
         
         foreach($products as $pd){
         ?> 
@@ -94,7 +98,7 @@ class SearchController extends Controller
                 <!-- Product Image Start -->
                 <div class="pro-img">
                     <a href="<?php echo url('product-detail',$pd->id)?>">
-                        <img class="primary-img" src="<?php echo url('img/products/'.$images->where('product_id',$pd->id)->first()->name); ?>" alt="single-product">
+                        <img class="primary-img" src="<?php echo url($pd->main_image); ?>" alt="single-product">
                     </a>
                     <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
                     <?php echo $pd->status==2?'<span class="sticker-new">new</span>':'';?>
@@ -106,11 +110,11 @@ class SearchController extends Controller
                         <h4><a href="<?php echo url('product-detail',$pd->id)?>"><?php echo $pd->name ?></a></h4>
                         <p><span class="price"><?php echo number_format( $pd->price ,0 , "." ,"." )?>d</p>
                     </div>
-                    <?php if(count($pd->promotion)){ ?>
+                    <?php if(count($pd->promotions)){ ?>
                         <div class="promotion mt-20">
                             <dl>
-                                <dt class="mb-1 text-success">Khuyen mãi:</dt>
-                                <?php foreach($pd->promotion as $km){ ?>
+                                <dt class="mb-1 text-success">Khuyến mãi:</dt>
+                                <?php foreach($pd->promotions as $km){ ?>
                                     <dd class="mb-1"><span class="lnr lnr-tag"><?php echo $km->content ?></span></dd>
                                 <?php } ?>
                                 
@@ -119,7 +123,7 @@ class SearchController extends Controller
                     <?php }?>
                     <div class="pro-actions">
                         <div class="actions-primary">
-                            <a href="<?php echo url('shopping/addCart',$pd->id)?>" title="Add to Cart">Thêm vào gio hàng</a>
+                            <a href="<?php echo url('shopping/addCart',$pd->id)?>" title="Add to Cart">Thêm vào giỏ hàng</a>
                         </div>
                         <div class="actions-secondary">
                             <a href="<?php echo url('add.wishlist.get',$pd->id)?>" title="WishList"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>

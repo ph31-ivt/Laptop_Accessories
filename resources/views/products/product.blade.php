@@ -66,7 +66,7 @@
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
                                         <a href="{{route('product-detail',$top->id)}}">
-                                            <img class="primary-img" src="{{asset('img/products/'.$images->where('product_id',$top->id)->first()->name)}}" alt="single-product">
+                                            <img class="primary-img" src="{{asset($top->main_image)}}" alt="single-product">
                                         </a>
                                     </div>
                                     <!-- Product Image End -->
@@ -86,7 +86,7 @@
                     <!-- Product Top End -->                            
                     <!-- Single Banner Start -->
                     <div class="col-img">
-                        <a href="shop.html"><img src="img/banner/banner-sidebar.jpg" alt="slider-banner"></a>
+                        <a href="shop.html"><img src="../img/banner/banner-sidebar.jpg" alt="slider-banner"></a>
                     </div>
                     <!-- Single Banner End -->
                 </div>
@@ -126,7 +126,7 @@
                                             <!-- Product Image Start -->
                                             <div class="pro-img">
                                                 <a href="{{route('product-detail',$pd->id)}}">
-                                                    <img class="primary-img" src="{{asset('img/products/'.$images->where('product_id',$pd->id)->first()->name)}}" alt="single-product">
+                                                    <img class="primary-img" src="{{asset($pd->main_image)}}" alt="single-product">
                                                 </a>
                                                 <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
                                                 <input type="hidden" value="{{$pd->id}}">
@@ -139,11 +139,11 @@
                                                     <h4><a href="{{route('product-detail',$pd->id)}}">{{$pd->name}}</a></h4>
                                                     <p><span class="price">{{number_format ( $pd->price ,0 , "." ,"." )}}đ</p>
                                                 </div>
-                                                @if(count($pd->promotion))
+                                                @if(count($pd->promotions))
                                                     <div class="promotion mt-20">
                                                         <dl>
                                                             <dt class="mb-1 text-success">Khuyến mãi:</dt>
-                                                            @foreach($pd->promotion as $km)
+                                                            @foreach($pd->promotions as $km)
                                                                 <dd class="mb-1"><span class="lnr lnr-tag">{{$km->content}}</span></dd>
                                                             @endforeach
                                                         </dl>
@@ -168,7 +168,7 @@
                         </div>
                         <!-- #grid view End -->
                         <div class="pro-pagination">
-                            <!-- {{$products}} -->
+                            {{$products->links()}}
                         </div>
                         <!-- Product Pagination Info -->
                     </div>

@@ -610,9 +610,9 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*--------------------------
          banner colse Popup
     ---------------------------*/
-        $('.popup_off_banner').on('click', function () {
-            $(".popup_banner").fadeOut(500);
-        });
+    $('.popup_off_banner').on('click', function () {
+        $(".popup_banner").fadeOut(500);
+    });
 
     /*---------------------------
         edit profile
@@ -637,7 +637,6 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*-----------------------
         Search
     -------------------------*/
-
     $("input[name='search']").keyup(function() {
         $(".result").css('visibility', 'visible');
         var category = $("select[name='category']").val();
@@ -645,8 +644,8 @@ NOTE: main.js, All custom script and plugin activation script in this file.
         var token = $("input[name='_token']").val();
         $.post('/search/ajax',{'_token': token,'key': name,'option': category}, function(data) {
             $('.dt-result').html(data);
-        });
 
+        });
     });
     $("*").click(function() {
         $(".result").css('visibility', 'hidden');
@@ -694,8 +693,8 @@ NOTE: main.js, All custom script and plugin activation script in this file.
         var token = $("input[name='_token']").val();
         var method = $("input[name='_method']").val();
         $.post('/ajax/cancelorder',{'_token': token,'_method': method,'id': id}, function(data) {
-            $("#alert-message").addClass('alert-success').html('<p>Đã hũy thành công </p>').fadeIn().delay(2000).fadeOut(500);
-            $(this).attr('disabled', 'true');
+            $("#alert-message").addClass('alert-success').html(data).fadeIn().delay(2000).fadeOut(500);
+            $(this).prop('disabled', 'true');
         });
     });
 
@@ -743,8 +742,6 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     });
 
     
-
-
 })(jQuery);
 
 function number_format( number, decimals, dec_point, thousands_sep ) {

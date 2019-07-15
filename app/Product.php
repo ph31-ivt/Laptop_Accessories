@@ -37,7 +37,7 @@ class Product extends Model
 
     public function promotions()    
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Promotion::class);
     }
 
     public function comments()  

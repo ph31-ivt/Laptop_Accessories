@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Mail\ContactMail;
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,17 +16,8 @@ use App\Comment;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $profile = User::find(1)->userprofile;
-    }
-
-    public function postLogin(Request $request)
+    
+    public function postLogin(LoginRequest $request)
     {
         $user = $request->only('email','password');
         if(\Auth::attempt($user)) {
@@ -35,27 +27,8 @@ class UserController extends Controller
 
     }
 
-    public function postRegister(Request $request)
+    public function postRegister(RegisterRequest $request)
     {
-        $this->validate($request,
-            [
-                'fullname'=>'required|string',
-                'email'=>'required|email|unique:users,email',
-                'password'=>'required|min:8|max:15',
-                're_password'=>'required|same:password'
-            ],
-            [
-                'fullname.required'=>'Vui lòng nhập họ tên đầy đủ của bạn',
-                'fullname.string'=>'Vui lòng nhập ký tự',
-                'email.required'=>'Vui lòng nhập email của bạn',
-                'email.email'=>'Vui lòng nhập đúng định dạng email',
-                'email.unique'=>'Email này đã tồn tại',
-                'password.required'=>'Vui lòng nhập password của bạn',
-                'password.min'=>'Vui lòng nhập ít nhất 8 ký tự',
-                'password.max'=>'Vui lòng nhập không quá 15 ký tự',
-                're_password.required'=>'Vui lòng nhập lại password của bạn',
-                're_password.same'=>'Password không trùng nhau'
-            ]);
         $user = new User();
         $user->fullname = $request->fullname;
         $user->email = $request->email;
@@ -82,7 +55,7 @@ class UserController extends Controller
         $data_user  = $request->only('fullname','email');
         $user = User::find($id);
         $user->update($data_user);
-        $user_profile = $user->userprofile;
+        $user_profile = $user->profile;
         if(!$user_profile){
             $profile = new Userprofile();
             $profile->phone = $request->phone;

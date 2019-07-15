@@ -1,0 +1,91 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class ImageTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('images')->insert([
+        	['path'=>'1.jpg','product_id'=>1],
+        	['path'=>'2.jpg','product_id'=>1],
+        	['path'=>'3.jpg','product_id'=>1],
+        	['path'=>'4.jpg','product_id'=>1],
+        	['path'=>'5.jpg','product_id'=>2],
+        	['path'=>'6.jpg','product_id'=>2],
+        	['path'=>'7.jpg','product_id'=>2],
+        	['path'=>'8.jpg','product_id'=>2],
+        	['path'=>'9.jpg','product_id'=>3],
+        	['path'=>'10.jpg','product_id'=>3],
+        	['path'=>'11.jpg','product_id'=>3],
+        	['path'=>'12.jpg','product_id'=>4],
+        	['path'=>'13.jpg','product_id'=>4],
+        	['path'=>'14.jpg','product_id'=>4],
+        	['path'=>'15.jpg','product_id'=>5],
+        	['path'=>'16.jpg','product_id'=>5],
+        	['path'=>'17.jpg','product_id'=>6],
+        	['path'=>'18.jpg','product_id'=>6],
+        	['path'=>'19.jpg','product_id'=>7],
+        	['path'=>'20.jpg','product_id'=>7],
+        	['path'=>'21.jpg','product_id'=>8],
+        	['path'=>'22.jpg','product_id'=>8],
+        	['path'=>'23.jpg','product_id'=>8],
+        	['path'=>'24.jpg','product_id'=>9],
+        	['path'=>'25.jpg','product_id'=>9],
+        	['path'=>'26.jpg','product_id'=>9],
+        	['path'=>'27.jpg','product_id'=>10],
+        	['path'=>'28.jpg','product_id'=>10],
+        	['path'=>'29.jpg','product_id'=>10],
+        	['path'=>'30.jpg','product_id'=>11],
+        	['path'=>'31.jpg','product_id'=>11],
+        	['path'=>'32.jpg','product_id'=>12],
+        	['path'=>'33.jpg','product_id'=>12],
+        	['path'=>'34.jpg','product_id'=>13],
+        	['path'=>'35.jpg','product_id'=>13],
+        	['path'=>'36.jpg','product_id'=>13],
+        	['path'=>'37.jpg','product_id'=>13],
+            ['path'=>'38.jpg','product_id'=>14],
+            ['path'=>'39.jpg','product_id'=>14],
+            ['path'=>'40.jpg','product_id'=>14],
+            ['path'=>'41.jpg','product_id'=>15],
+            ['path'=>'42.jpg','product_id'=>15],
+            ['path'=>'43.jpg','product_id'=>15],
+            ['path'=>'7.jpg','product_id'=>16],
+            ['path'=>'8.jpg','product_id'=>16],
+            ['path'=>'9.jpg','product_id'=>16],
+            ['path'=>'10.jpg','product_id'=>17],
+            ['path'=>'11.jpg','product_id'=>17],
+            ['path'=>'12.jpg','product_id'=>17],
+            ['path'=>'13.jpg','product_id'=>18],
+            ['path'=>'14.jpg','product_id'=>18],
+            ['path'=>'15.jpg','product_id'=>18],
+            ['path'=>'16.jpg','product_id'=>19],
+            ['path'=>'17.jpg','product_id'=>19],
+            ['path'=>'18.jpg','product_id'=>19],
+            ['path'=>'19.jpg','product_id'=>20],
+            ['path'=>'20.jpg','product_id'=>20],
+            ['path'=>'21.jpg','product_id'=>20],
+            ['path'=>'22.jpg','product_id'=>21],
+            ['path'=>'23.jpg','product_id'=>21],
+            ['path'=>'24.jpg','product_id'=>21],
+            ['path'=>'25.jpg','product_id'=>22],
+            ['path'=>'26.jpg','product_id'=>22],
+            ['path'=>'27.jpg','product_id'=>22],
+            ['path'=>'28.jpg','product_id'=>23],
+            ['path'=>'29.jpg','product_id'=>23],
+            ['path'=>'30.jpg','product_id'=>23],
+            ['path'=>'31.jpg','product_id'=>24],
+            ['path'=>'32.jpg','product_id'=>24],
+            ['path'=>'33.jpg','product_id'=>24],
+            ['path'=>'34.jpg','product_id'=>25],
+            ['path'=>'35.jpg','product_id'=>25],
+            ['path'=>'36.jpg','product_id'=>26],
+            ['path'=>'37.jpg','product_id'=>26],
+        ]);
+    }
+}
