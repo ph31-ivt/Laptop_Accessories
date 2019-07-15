@@ -128,7 +128,7 @@
                                 </div>
                                 <table class="table digital">
                                     <tbody>
-                                        @foreach($products->productdetail as $pd)
+                                        @foreach($products->productdetail->properties as $pd)
                                             <tr>
                                                 <th style="width: 150px;"><p><strong>{{$pd['key']}}</strong></p></th>
                                                 <td><p>{{$pd['value']}}</p></td>
