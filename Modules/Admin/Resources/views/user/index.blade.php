@@ -45,7 +45,7 @@
                                         @foreach($userlist as $user)
 											<tr class="" id="{{$user->id}}">
 												<td>{{$user->id}}</td>
-												<td>{{$user->name}}</td>
+												<td>{{$user->fullname}}</td>
 												<td>{{$user->email}}</td>
 												<td class="row  pl-5 text-center">
 													<a href="{{Route('edit-user', $user->id)}}" class="btn btn-sm btn-info mr-2"><i class="far fa-edit"></i></a>

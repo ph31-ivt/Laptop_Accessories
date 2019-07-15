@@ -12,7 +12,7 @@ class Product extends Model
     protected $products=['deleted_at'];
     protected $table = 'products';
     protected $fillable=[
-    	'name', 'price', 'quantity', 'producer', 'status', 'category_id', 'description','main_image'
+    	'name', 'price', 'quantity', 'producer', 'status', 'category_id', 'description', 'main_image'
     ];
 
     public function category()
@@ -34,7 +34,6 @@ class Product extends Model
     {
         return $this->hasOne(OrderDetail::class);
     }
-
     public function promotions()    
     {
         return $this->belongsToMany(Promotion::class);

@@ -9,6 +9,11 @@
                         <li class="breadcrumb-item active">Category</li>
                     </ol>
                     <!-- DataTables Example -->
+                    @if (session('msg'))
+                            <div class="alert alert-{{session('attribute')}} col-md-12 my-1 text-center">
+                                {{ session('msg') }}
+                            </div>
+                    @endif
                     <div class="card mb-3">
                         <div class="card-header row justify-content-between">
                             <div class="col-md-10 col-sm-10"> 
@@ -25,6 +30,18 @@
                                             <label for="name" class="text-info font-weight-bold"><i class="fas fa-layer-group mr-2"></i>Category Name<span class="text-danger ml-1">&#42;</span></label>
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Fill name for category" value="{{old('name')}}">
                                             <span class="text-warning font-weight-bold text-capatalizer">{{$errors->first('name')}}</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="parent_id" class="text-info font-weight-bold"><i class="fas fa-code-branch mr-2"></i>Category Branch<span class="text-danger ml-1">&#42;</span></label>
+                                            <select class="form-control" id="parent_id" name="parent_id">
+                                                <option value="0" class="font-weight-bold text-muted">Main Category</option>
+                                                @if(count($listcategory)!=0)
+                                                    @foreach($listcategory as $list)
+                                                        <option value="{{$list->id}}">{{$list->name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                             <span class="text-danger font-weight-bold text-capitalize"></span>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
@@ -85,7 +102,7 @@
                                     </div>
                                     <div class="form-group row col-md-12 justify-content-center">
                                         <button type="submit" class="rounded bg-info text-white form-control col-md-2 col-sm-12">Create</button>
-                                        <a href="{{Route('admin.get.listcategory')}}" class="rounded bg-secondary text-white form-control col-md-2 col-sm-10 mb-2 text-center">back</a>
+                                        <a href="{{Route('admin.get.listcategory')}}" class="rounded bg-secondary text-white form-control col-md-2 col-sm-10 mb-2 text-center">Category List</a>
                                     </div>
                                 </div>
 							</form>

@@ -44,7 +44,7 @@ class User extends Authenticatable
         return $this->fullname;
     }
 
-    public function profile()   // khac nhau userprofile()
+    public function profile()
     {
         return $this->hasOne(UserProfile::class);
     }
@@ -58,5 +58,5 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    
+
 }

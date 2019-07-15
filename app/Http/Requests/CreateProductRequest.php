@@ -28,7 +28,6 @@ class CreateProductRequest extends FormRequest
             'price'=> 'required|numeric',
             'quantity'=> 'required|numeric',
             'producer'=> 'required|min:3|max:50',
-            'product_type'=>'required',
             'status'=> 'required|numeric',
             'category_id'=> 'required',
             'main_image'=>'required|mimes:png,jpg,jpeg,gif|max:2048',

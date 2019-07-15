@@ -58,11 +58,11 @@
                                     <td class="text-center" id="product_id">{{$product->id}}</td>
                                     <td class="font-weight-bold text-muted" id="{{$product->id}}">{{$product->name}}</td>
                                     <td class="text-center"><img src="{{asset($product->main_image)}}" alt="failure" style="width: 60px; height: 60px;" class="img-circle {{$product->id}}"></td>
-                                    <td id="{{$product->price}}">{{number_format($product->price)}}</td>
+                                    <td id="{{$product->price}}">{{number_format($product->price)}} đ</td>
                                     <td class="text-center">{{$product->quantity}}</td>
                                     <td>{{$product->category->name}}</td>
                                     <td class="row">
-                                        <button type="button" class="btn btn-info btn-sm ml-2" id="edit-item" data-product_id="{{$product->id}}"><i class="fas fa-plus-circle"></i></button>
+                                        <button type="button" class="btn btn-info btn-sm ml-2" id="edit-item" data-product_id="{{$product->id}}" title="Import quantity for product"><i class="fas fa-plus-circle"></i></button>
                                         <a href="{{Route('admin.create.productdetail',$product->id)}}" class="btn btn-info btn-sm ml-1" title="show product and create detail "><i class="far fa-file-alt"></i></a>
                                         <a href="{{Route('edit-product-info',$product->id)}}" class="btn btn-secondary btn-sm ml-1"><i class="fas fa-pencil-alt" title="update"></i></a>
                                         <form action="{{Route('delete-product', $product->id)}}" method="post" 

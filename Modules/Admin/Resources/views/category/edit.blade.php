@@ -68,7 +68,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6 col-sm-12 ">
-                                        <div class="row">
+                                        <div class="form-group">
+                                            <label for="parent_id" class="text-info font-weight-bold"><i class="fas fa-code-branch mr-2"></i>Category Branch<span class="text-danger ml-1">&#42;</span></label>
+                                            <select class="form-control" id="parent_id" name="parent_id">
+                                                <option value="0" class="font-weight-bold text-muted">Main Category</option>
+                                                @if(count($listcategory)!=0)
+                                                    @foreach($listcategory as $list)
+                                                        <option value="{{$list->id}}"
+                                                           @if($list->id==$category->parent_id) selected @endif
+                                                            >{{$list->name}}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                             <span class="text-danger font-weight-bold text-capitalize"></span>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="icon" class="font-weight-bold text-info"><i class="far fa-file-image mr-1"></i>Change icon</label>
                                             <input type="file" name="icon" class="col-md-10" value="{{asset($category->icon)}}
                                             " >
@@ -81,7 +95,7 @@
                                 </div>
     							  <div class="form-group row col-md-12 justify-content-center">
     							    <button type="submit" class="rounded bg-info text-white form-control col-md-2 col-sm-12 mr-5">Update</button>
-    							    <a href="{{Route('admin.get.listcategory')}}" class="btn btn-secondary">cancel</a>
+    							    <a href="{{Route('admin.get.listcategory')}}" class="btn btn-secondary">Catgory List</a>
     							  </div>
 							</form>
                         </div>

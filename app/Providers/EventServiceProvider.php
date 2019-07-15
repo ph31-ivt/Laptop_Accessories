@@ -8,8 +8,13 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Category;
 use App\Product;
+use App\User;
+use App\Order;
 use App\Observers\CategoryObserver;
+use App\Observers\UserObserver;
 use App\Observers\ProductObserver;
+use App\Observers\OrderObserver;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -34,5 +39,8 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
         Category::observe(CategoryObserver::class);
         Product::observe(ProductObserver::class);
+        User::observe(UserObserver::class);
+        Order::observe(OrderObserver::class);
+
     }
 }

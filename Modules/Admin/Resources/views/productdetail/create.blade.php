@@ -9,6 +9,11 @@
         <li class="breadcrumb-item active">Product Detail</li>
     </ol>
     <!-- DataTables Example -->
+    @if (session('msg'))
+        <div class="alert alert-{{session('attribute')}} col-md-12 my-1 text-center">
+            {{ session('msg') }}
+        </div>
+    @endif
     <div class="card mb-3 p">
         <div class="card-header row justify-content-between">
             <div class="col-md-10 col-sm-10"> 
@@ -28,11 +33,16 @@
                 </div>
                 <div class="row">
                     @foreach ($images as $image)
-                    <div class="col-md-4 mb-2">
-                        <a href="#">
-                        <img src="{{asset($image->path)}}" alt="Lights" style="width:100%" class="img-thumbnail">
-                        </a>
-                    </div>
+                        <div class="col-md-4 mb-2 border border-darked thumbnail rounded">
+                            <a href="#">
+                                <img src="{{asset($image->path)}}" alt="Lights" style="width:100%" class="">
+                                <form action="{{Route('delete-image',$image->id)}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn-sm btn-secondary rounded"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
             </div>

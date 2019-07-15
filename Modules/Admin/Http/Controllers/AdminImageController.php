@@ -36,10 +36,10 @@ class AdminImageController extends Controller
     public function store(CreateImageRequest $request, $id)
     {
         if($request->hasfile('images'))
-         {   $i=0;
+         {  $i=0;
             foreach($request->file('images') as $image)
             {   
-                $newname=time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+                $newname=$id.'.'.time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
                 $image->move(public_path("img/product"), $newname);
                 $path='img/product/'.$newname;
                 $data[$i]['path']=$path;
@@ -89,6 +89,8 @@ class AdminImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image=Image::find($id);
+        $image->delete();
+        return back()->with('msg', 'Delete image is successfull')->with('attribute','success');
     }
 }

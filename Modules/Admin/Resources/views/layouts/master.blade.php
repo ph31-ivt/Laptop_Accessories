@@ -1,8 +1,8 @@
 <?php
-use Illuminate\Support\Facades\Auth;
-$admin=Auth::User()->adminname();
-
-?>
+    use Illuminate\Support\Facades\Auth;
+    $admin=Auth::User()->adminname();
+    
+    ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,7 +15,6 @@ $admin=Auth::User()->adminname();
         <script src="{{asset('theme_admin/jquery/jquery.min.js')}}"></script>
         <!-- Custom fonts for this template-->
         <link href="{{asset('theme_admin/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-       
         <!-- Page level plugin CSS-->
         <link href="{{asset('theme_admin/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
         <!-- Custom styles for this template-->
@@ -26,7 +25,6 @@ $admin=Auth::User()->adminname();
         --}}
     </head>
     <body id="page-top">
-       
         <nav class="navbar navbar-expand navbar-dark bg-info static-top">
             <a class="navbar-brand mr-1" href="index.html">Laptop Accessories</a>
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
@@ -117,18 +115,7 @@ $admin=Auth::User()->adminname();
                         <div class="dropdown-divider"></div>
                     </div>
                 </li>
-                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
-                    <span>Order</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                        <h5 class="dropdown-header text-info ">Order pages</h5>
-                        <a class="dropdown-item" href="{{Route('admin.get.listorder')}}">Order List</a>
-                        <div class="dropdown-divider"></div>
-                    </div>
-                </li>
-                  <li class="nav-item dropdown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-users"></i>
                     <span>User</span>
@@ -140,33 +127,50 @@ $admin=Auth::User()->adminname();
                         <div class="dropdown-divider"></div>
                     </div>
                 </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-fw fa-comment"></i>
-                        <span>Comment</span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                            <h5 class="dropdown-header text-info">Comment pages</h5>
-                            <a class="dropdown-item" href="{{Route('admin.get.listcomment')}}">List commnent</a>
-                            <a class="dropdown-item" href="{{Route('admin.get.dashboard')}}">Detail</a>
-                            <div class="dropdown-divider"></div>
-                        </div>
-                    </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Comment</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <h5 class="dropdown-header text-info">Comment pages</h5>
+                        <a class="dropdown-item" href="{{Route('admin.get.listcomment')}}">List commnent</a>
+                        <a class="dropdown-item" href="{{Route('admin.get.dashboard')}}">Detail</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="{{Route('admin.get.listorder')}}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Order</span></a>
                 </li>
-                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-image"></i>
+                    <span>Slide</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <h5 class="dropdown-header text-info">Slide pages</h5>
+                        <a class="dropdown-item" href="{{Route('create-slide-images')}}">Create</a>
+                        <a class="dropdown-item" href="{{Route('show-slide-images')}}">Slide show</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ad"></i>
+                    <span>Promotion</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                        <h5 class="dropdown-header text-info">Promotion pages</h5>
+                        <a class="dropdown-item" href="{{Route('create-promotion')}}">Create</a>
+                        <a class="dropdown-item" href="{{Route('get.list.promotion')}}">List promotion</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
             </ul>
             <div id="content-wrapper">
                 @yield('content')
-                
                 <!-- /.container-fluid -->
                 <!-- Sticky Footer -->
                 <footer class="sticky-footer">

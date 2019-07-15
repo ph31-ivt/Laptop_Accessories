@@ -23,7 +23,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|min:3|max:50',
+            'fullname'=>'required|min:3|max:50',
             'email'=>'required|unique:users,email,'.$this->id.'|min:3|max:50',
             'phone'=>'required|min:9|max:20',
             'gender'=>'required|numeric',

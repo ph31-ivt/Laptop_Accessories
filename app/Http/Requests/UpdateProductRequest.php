@@ -28,7 +28,6 @@ class UpdateProductRequest extends FormRequest
             'price'=>'required',
             'quantity'=>'required',
             'producer'=>'required',
-            'product_type'=>'required',
             'status'=>'required',
             'category_id'=>'required',
             'main_image'=>'mimes:jpg,png,jpeg,gif|max:2048'

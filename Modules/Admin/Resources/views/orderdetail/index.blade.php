@@ -34,14 +34,10 @@
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr class="text-info">
-                                <th>Id</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Unit price</th>
-                                <th>Discount</th>
-                                <th>Total Price</th>
-                                <th>Action</th>
+                            <tr class="text-muted font-weight-bold">
+                                <th colspan="2" class="text-center">Total</th>
+                                <th colspan="5" class="text-center">{{number_format($total)}} đ</th>
+                                
                             </tr>
                         </tfoot>
                         <tbody>
@@ -50,10 +46,10 @@
                                     <td class="text-center">{{$orderdetail->id}}</td>
                                     <td class="font-weight-bold text-muted">{{$orderdetail->product->name}}</td>
                                     <td class="text-left">{{$orderdetail->quantity}}</td>
-                                    <td>{{number_format($orderdetail->product->price)}}</td>
+                                    <td>{{number_format($orderdetail->product->price)}} đ</td>
                                     <td class="text-center">{{0}}</td>
                                     <td class="text-center"><?php $total=($orderdetail->quantity)*($orderdetail->product->price);
-                                     ?>{{number_format($total)}}</td>
+                                     ?>{{number_format($total)}} đ</td>
                                         
                                     <td class="row">
                                         <a href="" class="btn btn-danger btn-sm ml-1 ml-4"><i class="fas fa-window-close"></i></a>
@@ -79,7 +75,7 @@
     <footer class="sticky-footer">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright © Your Website 2019</span>
+                <span>Copyright © Thinhdang 2019</span>
             </div>
         </div>
     </footer>

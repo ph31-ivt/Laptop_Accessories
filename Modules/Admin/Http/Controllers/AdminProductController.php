@@ -46,8 +46,16 @@ class AdminProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {   
+
+        $maxid=Product::max('id');
+        if($maxid==null){
+            $maxid=1;
+        }
+        else{
+            $maxid++; 
+        }
         $image=$request->file('main_image');
-        $newname=time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
+        $newname=$maxid.'.'.time().'.'.$image->getClientOriginalExtension();
         $image->move(public_path("img/product"), $newname);
         $path='img/product/'.$newname;
         $data=$request->except('_token');
@@ -120,7 +128,6 @@ class AdminProductController extends Controller
        }
             $transfer= new AdminProductDetailController();
             $transfer->update($request, $id);
-            //dd($transfer);
          return back()->with('attribute','success')->with('prt','product has been updated');
         
     }
@@ -141,11 +148,25 @@ class AdminProductController extends Controller
     public function getdetail($id){
         dd(true);
     }
+    public function export($listorderdetail){
+        foreach ($listorderdetail as $orderdetail) {
+            $product=Product::find($orderdetail->product_id);
+            if($product->quantity>=$orderdetail->quantity){
+                $product->quantity-=$orderdetail->quantity;
+                $product->save();
+            }
+            else{
+
+                return back()->with('msg','Not enough quantity to export')->with('attribute', 'danger');
+            }
+        }
+    }
     public function destroy($id)
     {
         $product=Product::find($id);
         $product->delete();
-        $product->forceDelete();
+        //$product->forceDelete();
         return redirect()->Route('admin.get.listproduct');
     }
+
 }

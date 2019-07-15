@@ -44,11 +44,6 @@
                     </div>
                     <div class="col-md-5 col-sm-12">
                         <div class="form-group">
-                            <label for="product_type" class="text-info font-weight-bold"><i class="fas fa-code-branch mr-2"></i>Product type<span class="text-danger ml-1">&#42;</span></label>
-                            <input type="text" class="form-control" id="product_type" name="product_type" placeholder="Fill Product type" value="{{old('product_type')}}">
-                             <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('product_type')}}</span>
-                        </div>
-                        <div class="form-group">
                             <label for="status" class="text-info font-weight-bold"><i class="fas fa-info-circle mr-2"></i>Status product<span class="text-danger ml-1">&#42;</span></label>
                             <select class="form-control" id="status" name="status" value="{{old('status')}}">
                                 <option value="0">--------------</option>
@@ -72,7 +67,6 @@
                             <label for="description" class="text-info font-weight-bold">Description Product</label>
                             <textarea class="form-control" id="description" name="description" rows="4"></textarea>
                             <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('description')}}</span>
-
                         </div>
                         <div class="form-group">
                             <div class="row">

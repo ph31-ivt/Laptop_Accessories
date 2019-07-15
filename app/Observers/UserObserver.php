@@ -5,7 +5,7 @@ namespace App\Observers;
 use App\User;
 use App\Userprofile;
 use App\Order;
-use App\OrderDetail;
+use App\DB;
 
 class UserObserver
 {
@@ -39,12 +39,21 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        // $userprofile=Userprofile::find($user->id)
-        // $userprofile::delete();
-        // $orderlist=Order::where('user_id',$user->id)->get();
-        // //continue...
+       //
     }
-
+    public function deleting(User $user){
+         
+         $userprofiles=Userprofile::where('user_id', $user->id)->get();
+         foreach ($userprofiles as $userprofile) {
+             $userprofile->delete();
+         }
+         $orderlist=Order::where('user_id',$user->id)->get();
+         foreach ($orderlist as $order) {
+            //dd($order);
+             $order->delete();//->observer order to delete orderdetail
+         }
+         
+    }
     /**
      * Handle the user "restored" event.
      *
