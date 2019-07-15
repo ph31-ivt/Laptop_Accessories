@@ -5,18 +5,18 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Image;
-use App\Http\Requests\CreateImageRequest;
+use App\Http\Requests\CreatePromotionRequest;
+use App\Promotion;
 
-class AdminImageController extends Controller
+class AdminPromotionController extends Controller
 {
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
-    {
-        return view('admin::index');
+    {   
+        return view('admin::promotion.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class AdminImageController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        return view('admin::promotion.create');
     }
 
     /**
@@ -33,22 +33,11 @@ class AdminImageController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(CreateImageRequest $request, $id)
+    public function store(CreatePromotionRequest $request)
     {
-        if($request->hasfile('images'))
-         {  $i=0;
-            foreach($request->file('images') as $image)
-            {   
-                $newname=$id.'.'.time().rand(1000,9999).'.'.$image->getClientOriginalExtension();
-                $image->move(public_path("img/product"), $newname);
-                $path='img/product/'.$newname;
-                $data[$i]['path']=$path;
-                $data[$i]['product_id']=$id;
-                $i++;
-            }
-            Image::insert($data);
-         }
-        return back()->with('success', 'Your images has been successfully');
+       $newpromotion=$request->only('content');
+       Promotion::create($newpromotion);
+       return back()->with('msg', 'Create promotion is successful')->with('attribute', 'success');
     }
 
     /**
@@ -89,8 +78,6 @@ class AdminImageController extends Controller
      */
     public function destroy($id)
     {
-        $image=Image::find($id);
-        $image->delete();
-        return back()->with('msg', 'Delete image is successfull')->with('attribute','success');
+        //
     }
 }

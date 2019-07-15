@@ -128,7 +128,6 @@ class AdminProductController extends Controller
        }
             $transfer= new AdminProductDetailController();
             $transfer->update($request, $id);
-            //dd($transfer);
          return back()->with('attribute','success')->with('prt','product has been updated');
         
     }

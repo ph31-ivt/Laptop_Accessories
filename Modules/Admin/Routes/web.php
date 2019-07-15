@@ -55,7 +55,19 @@ Route::prefix('admin')->group(function() {
         Route::get('/update-status/{id}/{idex}','AdminCommentController@changestatus')->name('update-status');
     });
     Route::group(['prefix'=>'image'], function(){
-       
         Route::post('/store_image/{id}','AdminImageController@store')->name('store-image');
+        Route::delete('/delete_image/{id}','AdminImageController@destroy')->name('delete-image');
+    });
+    Route::group(['prefix'=>'slide'], function(){
+        Route::get('/create_slide','AdminSlideController@create')->name('create-slide-images');
+        Route::post('/store_slide', 'AdminSlideController@store')->name('store-slide-images');
+        Route::get('/show_slide','AdminSlideController@index')->name('show-slide-images');
+        Route::delete('/delete_slide/{id}', "AdminSlideController@destroy")->name('delete-slide');
+    });
+    Route::group(['prefix'=>'promotion'], function(){
+        Route::get('/create_promotion','AdminPromotionController@create')->name('create-promotion');
+        Route::get('/index','AdminPromotionController@index')->name('get.list.promotion');
+        Route::post('/store_promotion', 'AdminPromotionController@store')->name('store-promotion');
+        Route::delete('/delete_promotion/{id}', 'AdminPromotionController@destroy')->name('delete-promotion');
     });
 });
