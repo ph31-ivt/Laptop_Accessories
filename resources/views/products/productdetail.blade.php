@@ -11,7 +11,7 @@
         <div class="breadcrumb">
             <ul class="d-flex align-items-center">
                 <li><a href="{{route('home')}}">Trang chủ</a></li>
-                <li><a href="{{route('product.get',1)}}">Laptop</a></li>
+                <li><a href="{{route('product.get',$products->category->id)}}">{{$products->category->name}}</a></li>
                 <li class="active"><a href="product.html">Sản phẩm</a></li>
             </ul>
         </div>
@@ -29,12 +29,12 @@
                     <!-- Thumbnail Large Image start -->
                     <div class="tab-content">
                         <div id="thumb0" class="tab-pane fade show active">
-                            <a data-fancybox="images" href="{{asset('img/products/'.$products->main_image)}}"><img src="{{asset($products->main_image)}}" alt="product-view"></a>
+                            <a data-fancybox="images" href="{{asset($products->main_image)}}"><img src="{{asset($products->main_image)}}" alt="product-view"></a>
                         </div>
                         <?php $count=1; ?>
                         @foreach($images->where('product_id',$products->id) as $ig)
-                            <div id="thumb{{$count}}" class="tab-pane fade }}">
-                                <a data-fancybox="images" href="{{asset('img/products/'.$ig->path)}}"><img src="{{asset('img/products/'.$ig->path)}}" alt="product-view"></a>
+                            <div id="thumb{{$count}}" class="tab-pane fade">
+                                <a data-fancybox="images" href="{{asset($ig->path)}}"><img src="{{asset($ig->path)}}" alt="product-view"></a>
                             </div>
                             <?php $count++; ?>
                         @endforeach
@@ -45,7 +45,7 @@
                         <div class="thumb-menu owl-carousel nav tabs-area" role="tablist">
                             <?php $count=1; ?>
                             @foreach($images->where('product_id',$products->id) as $ig)
-                                <a class="{{$count==0?'active':''}}" data-toggle="tab" href="#thumb{{$count}}"><img src="{{asset('img/products/'.$ig->path)}}" alt="product-thumbnail">
+                                <a class="{{$count==0?'active':''}}" data-toggle="tab" href="#thumb{{$count}}"><img src="{{asset($ig->path)}}" alt="product-thumbnail">
                                 <?php $count++; ?></a>
                             @endforeach
                         </div>

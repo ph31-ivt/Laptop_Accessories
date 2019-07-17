@@ -1229,7 +1229,7 @@ li.megamenu-img a {
     backface-visibility: hidden;
     -webkit-transition: all 0.5s ease-in-out 0s;
     transition: all 0.5s ease-in-out 0s;
-    width: 100%;
+    height: 226px;
 }
 .pro-img .secondary-img {
     left: 0;
@@ -2418,6 +2418,7 @@ li.megamenu-img a {
 .main-product-thumbnail .tab-content img,
 .product-thumbnail .thumb-menu div img {
     width: 100%;
+    max-height: 432px;
 }
 
 .thumb-menu.owl-carousel .owl-item a {
@@ -4683,4 +4684,3 @@ tr.order_item > td {
 img.img-small{
   width: 100%;
 }
-

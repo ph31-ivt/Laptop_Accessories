@@ -26,7 +26,7 @@ class SearchController extends Controller
     	foreach($searchs as $se)
     	{
 		   ?><li class="item-search">
-                <a class="p-img" href="<?php echo route('product-detail',$se->id) ?> "><img src="<?php echo '../'.$se->main_image  ?>" alt=""></a>
+                <a class="p-img" href="<?php echo route('product-detail',$se->id) ?> "><img src="<?php echo asset($se->main_image)  ?>" alt=""></a>
                 <a class="p-name" href="<?php echo route('product-detail',$se->id) ?>"><?php echo $se->name ?></a>
             </li>
             <?php

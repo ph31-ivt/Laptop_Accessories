@@ -82,10 +82,37 @@
                                     @endif
                                 </div>
                             </div>
+                            @if($errors->has('re_new_password')||$errors->has('new_password'))
+                                <div class="col-md-12 alert alert-danger form-group">
+                                    @foreach($errors->all() as $er)
+                                    <strong>{{ $er }}</strong>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="col-md-12">
                                 <div class="checkout-form-list create-acc mb-15">
                                     <input id="cbox-edit" type="checkbox" name="register"  />
                                     <label>Chỉnh sữa thông tin tài khoản</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="change-password">
+                                <div class="checkout-form-list create-acc mb-15">
+                                    <input id="cbox" type="checkbox" name="change_password" />
+                                    <label>Thay đổi mật khẩu</label>
+                                </div>
+                                <div id="cbox_info" class="checkout-form-list create-accounts mb-25">
+                                    <div class="checkout-form-list form-group">
+                                        <label>Mật khẩu  <span class="required">*</span></label>
+                                        <input type="password" class="form-control" name="old_password" placeholder="Nhập mật khẩu cũ" />
+                                    </div>
+                                    <div class="checkout-form-list form-group">
+                                        <label>Mật khẩu  <span class="required">*</span></label>
+                                        <input type="password" class="form-control" name="new_password" placeholder="Nhập mật khẩu mới" />
+                                    </div>
+                                    <div class="checkout-form-list form-group">
+                                        <label>Nhập lại mật khẩu  <span class="required">*</span></label>
+                                        <input type="password" class="form-control" name="re_new_password" placeholder="Nhập lại mật khẩu mới" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="box-hidden">

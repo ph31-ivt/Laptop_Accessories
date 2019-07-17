@@ -142,7 +142,7 @@ class CartController extends Controller
             <tr class="cart_item">
                 <td class="product-img " style="width: 100px;">
                     <a href="<?php echo url('product-detail',$od->product_id)?>">
-                        <img class="primary-img img-small" src="<?php echo url($od->main_image)?>" alt="single-product">
+                        <img class="primary-img img-small" src="<?php echo asset($od->product->main_image) ?>" alt="single-product">
                     </a>
                 </td>
                 <td class="product-name text-left">

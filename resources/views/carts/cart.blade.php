@@ -23,6 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12">
+                <h2 class="mb-10">Chi tiết giỏ hàng</h2>
                 <!-- Form Start -->
                 <form action="{{route('update.cart.post')}}" method="POST">
                 	@csrf

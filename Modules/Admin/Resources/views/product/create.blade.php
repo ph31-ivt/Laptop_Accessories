@@ -49,7 +49,7 @@
                                 <option value="0">--------------</option>
                                 <option value="1">Hàng mới</option>
                                 <option value="2">Hàng hót</option>
-                                <option value="2">Hàng cũ</option>
+                                <option value="3">Hàng cũ</option>
                             </select>
                              <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('status')}}</span>
                         </div>

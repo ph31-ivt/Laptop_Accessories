@@ -20,14 +20,12 @@ Route::post('/contact','HomeController@postContact')->name('contact.post');
 Route::group(['prefix'=>'Auth'],function(){
 	Route::get('/login',function(){ return view('users.login');})->name('user.login.get');
 	Route::post('/login','UserController@postLogin')->name('user.login.post');
-
 	Route::get('/register',function(){ return view('users.register');})->name('user.register.get');
 	Route::post('register','UserController@postRegister')->name('user.register.post');
-
 	Route::get('/profile/{id}','UserController@profile')->name('user.profile.get')->middleware('check.login');
 	Route::put('/profile/{id}','UserController@updateProfile')->name('update.profile.put');
-
 	Route::get('/logout','UserController@logoutUser')->name('user.logout.get');
+	Route::get('/forgot-password','UserController@forgotPassword')->name('forgotPassword.get');
 });
 
 // Display product
@@ -90,9 +88,7 @@ Route::group(['prefix'=>'shopping'],function(){
 
 });
 
-Route::get('vidu/{mk}',function($mk){
-  dd(Hash::check($mk, \Auth::user()->password));
-});
+Route::get('vidu/{id}','CartController@orderDetail');
 
 
 // Route::get('/', function () {

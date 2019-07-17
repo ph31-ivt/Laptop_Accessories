@@ -617,15 +617,15 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*---------------------------
         edit profile
     -----------------------------*/
-    $('.box-hidden').hide();
+    $('.box-hidden, #change-password').hide();
     $("#cbox-edit").on('click', function () {
         var evenCheckbox = $("#cbox-edit").prop('checked');
         if (evenCheckbox==true) {
             $("input.edit-profile").removeAttr("readonly",'true');
-            $('.box-hidden').slideToggle();
+            $('.box-hidden, #change-password').slideToggle();
         }else{
             $("input.edit-profile").prop("readonly",'true');
-            $('.box-hidden').slideToggle();
+            $('.box-hidden, #change-password').slideToggle();
         }
      })
     

@@ -78,7 +78,7 @@
                         <div id="{{strtr($ca->name,' ','-')}}_1" class="tab-pane fade {{$category_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <?php 
-                                $categories_p = $categories->where('parent_id',3)->pluck('id');
+                                $categories_p = $categories->where('parent_id',$ca->id)->pluck('id');
                                 if (count($categories_p)) {
                                     $products_n = $products->whereIn('category_id',$categories_p)->where('status',2);
                                 }else{
@@ -142,7 +142,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav tabs-area" role="tablist">
                         <?php $producer_count_0 = 0; ?>
-                        @foreach($products->where('category_id',1)->groupBy('producer') as $key=>$producer)
+                        @foreach($products->where('category_id',2)->groupBy('producer') as $key=>$producer)
                             <li class="nav-item">
                                 <a class="nav-link {{$producer_count_0==0?'active':''}}" data-toggle="tab" href="#{{$key}}">{{$key}}</a>
                             </li>
@@ -153,7 +153,7 @@
                 <!-- Tab Contetn Start -->
                 <div class="tab-content">
                     <?php $producer_count_1 = 0; ?>
-                    @foreach($products->where('category_id',1)->groupBy('producer') as $key=>$producer)
+                    @foreach($products->where('category_id',2)->groupBy('producer') as $key=>$producer)
                         <div id="{{$key}}" class="tab-pane fade {{$producer_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <div class="best-seller-pro-active owl-carousel">
@@ -213,7 +213,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav tabs-area" role="tablist">
                         <?php $producer_count_0 = 0; ?>
-                        @foreach($products->where('category_id',2)->groupBy('producer') as $key=>$producer)
+                        @foreach($products->where('category_id',3)->groupBy('producer') as $key=>$producer)
                             <li class="nav-item">
                                 <a class="nav-link {{$producer_count_0==0?'active':''}}" data-toggle="tab" href="#{{$key}}">{{$key}}</a>
                             </li>
@@ -228,7 +228,7 @@
                         <div id="{{$key}}" class="tab-pane fade {{$producer_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <div class="best-seller-pro-active owl-carousel">
-                                 @foreach($products->where('category_id',2)->where('producer',$key) as $pp)
+                                 @foreach($products->where('category_id',3)->where('producer',$key) as $pp)
                                     <!-- Single Product Start -->
                                     <div class="single-product">
                                         <!-- Product Image Start -->
@@ -284,7 +284,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav tabs-area" role="tablist">
                         <?php $accessory_count_0 = 0; ?>
-                        @foreach($categories->where('parent_id',3) as $ca)
+                        @foreach($categories->where('parent_id',4) as $ca)
                             <li class="nav-item">
                                 <a class="nav-link {{$accessory_count_0==0?'active':''}}" data-toggle="tab" href="#{{strtr($ca->name,' ','-')}}">{{$ca->name}}</a>
                             </li>
@@ -295,11 +295,11 @@
                 <!-- Tab Contetn Start -->
                 <div class="tab-content">
                     <?php $accessory_count_1 = 0; ?>
-                    @foreach($categories->where('parent_id',3) as $ca)
+                    @foreach($categories->where('parent_id',4) as $ca)
                         <div id="{{strtr($ca->name,' ','-')}}" class="tab-pane fade {{$accessory_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <div class="best-seller-pro-active owl-carousel">
-                                 @foreach($products->where('category_id',$ca->id) as $pp)
+                                 @foreach($products->where('category_id',$ca->id)->where('status',3) as $pp)
                                     <!-- Single Product Start -->
                                     <div class="single-product">
                                         <!-- Product Image Start -->

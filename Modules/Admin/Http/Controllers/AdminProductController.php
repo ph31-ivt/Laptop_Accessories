@@ -86,7 +86,6 @@ class AdminProductController extends Controller
         $categories=Category::All();
         $properties=Property::where('category_id', $product->category_id)->get();
         $productdetail=ProductDetail::where('product_id',$id)->get()->toArray();
-        dd($productdetail);
         if(count($productdetail)==0){
             $profile=array();
         }

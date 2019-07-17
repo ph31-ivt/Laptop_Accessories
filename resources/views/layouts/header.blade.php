@@ -182,11 +182,12 @@
                         <nav>
                             <ul class="vertical-menu-list">
                                 @foreach($categories->where('parent_id',0) as $ct)
-                                    <li><a href="{{route('product.get',1)}}"><span><img src="{{asset(
+                                    <li><a href="{{route('product.get',$ct->id)}}"><span><img src="{{asset(
                                         $ct->icon)}}" alt="menu-icon"></span>{{$ct->name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                         <!-- Vertical Mega-Menu Start -->
                                         <ul class="ht-dropdown megamenu first-megamenu">
                                             <!-- Single Column Start -->
+                                            @if(count($ct->products->groupBy('producer')))
                                             <li class="single-megamenu">
                                                 <ul>
                                                     <li class="menu-tile"><strong>THƯƠNG HIỆU</strong></li>
@@ -195,6 +196,7 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            @endif
                                             <!-- Single Column End -->
                                             @foreach($categories->where('parent_id',$ct->id) as $ct_child)
                                             <!-- Single Column Start -->
@@ -202,8 +204,7 @@
                                                 <ul>
                                                     <li class="menu-tile">{{$ct_child->name}}</li>
                                                     @foreach($ct_child->properties as $child)
-                                                    
-                                                    <li><a href="shop.html">{{$child->name}}</a></li>
+                                                    <li><a href="{{$child->id}}">{{$child->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>

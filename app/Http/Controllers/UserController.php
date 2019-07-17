@@ -52,10 +52,37 @@ class UserController extends Controller
 
     public function updateProfile(UserRequest $request, $id)
     {
-        $data_user  = $request->only('fullname','email');
-        $user = User::find($id);
-        $user->update($data_user);
-        $user_profile = $user->profile;
+        if ($request->has('change_password')) {
+            if (\Hash::check($request->old_password, \Auth::user()->password)) {
+                $this->validate($request,
+                    [
+                        'new_password'=>'required|min:8|max:15',
+                        're_new_password'=>'required|same:new_password'
+                    ],
+                    [
+                        'new_password.required'=>'Vui lòng nhập password mới của bạn',
+                        'new_password.min'=>'Vui lòng nhập ít nhất 8 ký tự',
+                        'new_password.max'=>'Vui lòng nhập không quá 15 ký tự',
+                        're_new_password.required'=>'Vui lòng nhập lại password mới của bạn',
+                        're_new_password.same'=>'Password không trùng nhau'
+                    ]
+                );
+                $data_user  = $request->only('fullname','email');
+                $data_user['password'] = bcrypt($request->new_password);
+                $user = User::find($id);
+                $user->update($data_user);
+                $user_profile = $user->profile;
+            }else{
+                return back()->with(['flast'=>'danger','alert-message'=>'Mật khẩu không đúng']);
+            }
+
+        }else{
+            $data_user  = $request->only('fullname','email');
+            $user = User::find($id);
+            $user->update($data_user);
+            $user_profile = $user->profile;
+        }
+        
         if(!$user_profile){
             $profile = new Userprofile();
             $profile->phone = $request->phone;

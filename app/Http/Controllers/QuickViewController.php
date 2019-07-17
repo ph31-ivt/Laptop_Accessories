@@ -18,10 +18,13 @@ class QuickViewController extends Controller
             <div class="col-lg-5 mb-all-40">
                 <!-- Thumbnail Large Image start -->
                 <div class="tab-content">
-                    <?php $count=0; ?>
+                    <div id="thumb-0" class="tab-pane fade show active">
+                        <a data-fancybox="images" href="<?php echo asset($products->main_image)?>"><img src="<?php echo asset($products->main_image)?>" alt="product-view"></a>
+                    </div>
+                    <?php $count=1; ?>
                     <?php foreach($images as $ig){?>
-                        <div id="thumb-<?php echo $count?>" class="tab-pane fade <?php echo $count==0?'show active':''?>">
-                            <a data-fancybox="images" href="<?php echo asset('../img/products/'.$ig->path)?>"><img src="<?php echo asset('../img/products/'.$ig->path)?>" alt="product-view"></a>
+                        <div id="thumb-<?php echo $count?>" class="tab-pane fade">
+                            <a data-fancybox="images" href="<?php echo asset($ig->path)?>"><img src="<?php echo asset($ig->path)?>" alt="product-view"></a>
                         </div>
                         <?php  $count++; ?>
                     <?php }?>

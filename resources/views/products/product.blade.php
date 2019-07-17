@@ -11,8 +11,8 @@
     <div class="container">
         <div class="breadcrumb">
             <ul class="d-flex align-items-center">
-                <li><a href="{{route('home')}}">Home</a></li>
-                <li class="active"><a href="product.html"></a></li>
+                <li><a href="{{route('home')}}">Trang chủ</a></li>
+                <li class="active"><a href=""></a></li>
             </ul>
         </div>
     </div>
@@ -64,9 +64,9 @@
                                 <!-- Single Product Start -->
                                 <div class="single-product single-product-sidebar">
                                     <!-- Product Image Start -->
-                                    <div class="pro-img">
+                                    <div class="small-img">
                                         <a href="{{route('product-detail',$top->id)}}">
-                                            <img class="primary-img" src="{{asset($top->main_image)}}" alt="single-product">
+                                            <img class="detail-small-img" src="{{asset($top->main_image)}}" alt="single-product">
                                         </a>
                                     </div>
                                     <!-- Product Image End -->
