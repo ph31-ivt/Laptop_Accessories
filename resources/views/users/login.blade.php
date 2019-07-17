@@ -47,7 +47,6 @@
                                         </div>
                                     @endif
                                 </div>
-                                <p class="lost-password"><a href="forgot-password.html">Quên mật khẩu?</a></p>
                                 <input type="submit" value="Đăng nhập" class="return-customer-btn">
                             </form>
                         </div>

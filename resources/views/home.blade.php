@@ -157,7 +157,7 @@
                         <div id="{{$key}}" class="tab-pane fade {{$producer_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <div class="best-seller-pro-active owl-carousel">
-                                 @foreach($products->where('category_id',1)->where('producer',$key) as $pp)
+                                 @foreach($products->where('category_id',2)->where('producer',$key) as $pp)
                                     <!-- Single Product Start -->
                                     <div class="single-product">
                                         <!-- Product Image Start -->
@@ -215,7 +215,7 @@
                         <?php $producer_count_0 = 0; ?>
                         @foreach($products->where('category_id',3)->groupBy('producer') as $key=>$producer)
                             <li class="nav-item">
-                                <a class="nav-link {{$producer_count_0==0?'active':''}}" data-toggle="tab" href="#{{$key}}">{{$key}}</a>
+                                <a class="nav-link {{$producer_count_0==0?'active':''}}" data-toggle="tab" href="#{{$key}}_1">{{$key}}</a>
                             </li>
                             <?php $producer_count_0++; ?>
                         @endforeach
@@ -224,8 +224,8 @@
                 <!-- Tab Contetn Start -->
                 <div class="tab-content">
                     <?php $producer_count_1 = 0; ?>
-                    @foreach($products->groupBy('producer') as $key=>$producer)
-                        <div id="{{$key}}" class="tab-pane fade {{$producer_count_1==0?'show active':''}}">
+                    @foreach($products->where('category_id',3)->groupBy('producer') as $key=>$producer)
+                        <div id="{{$key}}_1" class="tab-pane fade {{$producer_count_1==0?'show active':''}}">
                             <!-- Arrivals Product Activation Start Here -->
                             <div class="best-seller-pro-active owl-carousel">
                                  @foreach($products->where('category_id',3)->where('producer',$key) as $pp)

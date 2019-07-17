@@ -25,7 +25,6 @@ Route::group(['prefix'=>'Auth'],function(){
 	Route::get('/profile/{id}','UserController@profile')->name('user.profile.get')->middleware('check.login');
 	Route::put('/profile/{id}','UserController@updateProfile')->name('update.profile.put');
 	Route::get('/logout','UserController@logoutUser')->name('user.logout.get');
-	Route::get('/forgot-password','UserController@forgotPassword')->name('forgotPassword.get');
 });
 
 // Display product
@@ -87,9 +86,6 @@ Route::group(['prefix'=>'shopping'],function(){
 	Route::put('/checkout','CartController@checkOut')->name('checkout.put');
 
 });
-
-Route::get('vidu/{id}','CartController@orderDetail');
-
 
 // Route::get('/', function () {
 //     return view('welcome');
