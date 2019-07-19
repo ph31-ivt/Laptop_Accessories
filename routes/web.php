@@ -33,7 +33,7 @@ Route::get('/product/{category}','ProductController@product')->name('product.get
 
 // Search
 Route::post('/search/ajax','SearchController@searchAjax');     // Search bang ajax
-Route::post('/search','SearchController@search')->name('search.post'); // Seach bang phuong thuc post bang Category
+Route::get('/search','SearchController@search')->name('search.get'); // Seach bang phuong thuc post bang Category
 Route::get('/search-producer/{category_id}/{producer}','SearchController@searchProducer')->name('search.producer.get');
 Route::get('/search-property/{category_id}/{property}','SearchController@searchProperty')->name('search.property.get');
 Route::post('/fill/ajax','SearchController@fill');                     // loc san pham

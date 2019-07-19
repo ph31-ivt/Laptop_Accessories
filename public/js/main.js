@@ -39,15 +39,15 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     /*--------------------------
     1. Newsletter Popup
     ---------------------------*/
-    setTimeout(function () {
-        $('.popup_wrapper').css({
-            "opacity": "1",
-            "visibility": "visible"
-        });
-        $('.popup_off').on('click', function () {
-            $(".popup_wrapper").fadeOut(500);
-        })
-    },700000);
+    // setTimeout(function () {
+    //     $('.popup_wrapper').css({
+    //         "opacity": "1",
+    //         "visibility": "visible"
+    //     });
+    //     $('.popup_off').on('click', function () {
+    //         $(".popup_wrapper").fadeOut(500);
+    //     })
+    // },700000);
 
     /*----------------------------
     2. Mobile Menu Activation

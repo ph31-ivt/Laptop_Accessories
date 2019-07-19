@@ -190,6 +190,9 @@
                                     <td><span class="total amount text-danger">{{Cart::instance('cart')->subtotal(0,',','.')}} đ</span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3">Quý khách sẽ thanh toán bằng tiền mặt khi nhận hàng. Vui lòng bấm nút <strong>"Đặt hàng"</strong> để hoàn tất.</td>
+                                </tr>
                             </tfoot>
                         </table>
                         <input type="submit" form="checkout-infor-form" class="btn btn-danger btn-block mt-30" value="Đặt hàng" {{Auth::check()?'':'disabled'}} >

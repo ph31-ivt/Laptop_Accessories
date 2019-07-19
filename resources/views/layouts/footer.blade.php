@@ -58,7 +58,7 @@
         <div class="footer-top">
             <div class="container">
                 <!-- Signup Newsletter Start -->
-                <div class="row mb-60">
+                <!-- <div class="row mb-60">
                      <div class="col-xl-7 col-lg-7 ml-auto mr-auto col-md-8">
                         <div class="news-desc text-center mb-30">
                              <h3>Đăng ký nhận tin mới</h3>
@@ -71,7 +71,7 @@
                              </form>
                          </div>
                      </div>
-                </div> 
+                </div>  -->
                 <!-- Signup-Newsletter End -->                   
                 <div class="row">
                     <!-- Single Footer Start -->

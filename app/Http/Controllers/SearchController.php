@@ -133,6 +133,7 @@ class SearchController extends Controller
                         <img class="primary-img" src="<?php echo url($pd->main_image); ?>" alt="single-product">
                     </a>
                     <a href="#" class="quick_view" data-toggle="modal" data-target="#myModal" title="Quick View"><i class="lnr lnr-magnifier"></i></a>
+                    <input type="hidden" value="<?php echo $pd->id ?>">
                     <?php echo $pd->status==2?'<span class="sticker-new">new</span>':'';?>
                 </div>
                 <!-- Product Image End -->
@@ -149,7 +150,6 @@ class SearchController extends Controller
                                 <?php foreach($pd->promotions as $km){ ?>
                                     <dd class="mb-1"><span class="lnr lnr-tag"><?php echo $km->content ?></span></dd>
                                 <?php } ?>
-                                
                             </dl>
                         </div>
                     <?php }?>
@@ -158,7 +158,7 @@ class SearchController extends Controller
                             <a href="<?php echo url('shopping/addCart',$pd->id)?>" title="Add to Cart">Thêm vào giỏ hàng</a>
                         </div>
                         <div class="actions-secondary">
-                            <a href="<?php echo url('add.wishlist.get',$pd->id)?>" title="WishList"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>
+                            <a href="<?php echo url('shopping/wishlist',$pd->id)?>" title="WishList"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>
                         </div>
                     </div>
                 </div>

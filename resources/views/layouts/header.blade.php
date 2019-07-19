@@ -7,7 +7,7 @@
     </div>
     <!-- Banner Popup End -->
    <!-- Newsletter Popup Start -->
-    <div class="popup_wrapper">
+<!--     <div class="popup_wrapper">
         <div class="test">
             <span class="popup_off">Đống</span>
             <div class="subscribe_area text-center mt-60">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Newsletter Popup End -->
     <!-- Main Header Area Start Here -->
     <header>
@@ -73,8 +73,8 @@
                     <!-- Categorie Search Box Start Here -->
                     <div class="col-lg-6 col-md-8 ml-auto mr-auto col-10">
                         <div class="categorie-search-box">
-                            <form action="{{route('search.post')}}" autocomplete="off"  method="post">
-                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                            <form action="{{route('search.get')}}" autocomplete="off"  method="GET">
+                                @csrf
                                 <div class="form-group">
                                     <select class="bootstrap-select" name="category">
                                         <option value="0">Tất cã danh mục</option>
@@ -160,10 +160,13 @@
                     </div>                       
                     <div class="col-xl-9 col-lg-8 col-md-12 ">
                         <nav class="d-none d-lg-block">
+                            <?php 
+                                $url = substr( url()->full(),  20, 7);
+                            ?>
                             <ul class="header-bottom-list d-flex">
-                                <li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
-                                <li><a href="{{route('about')}}">Thông tin</a></li>
-                                <li><a href="{{route('contact')}}">Liên hệ</a></li>
+                                <li class="{{$url==''?'active':''}}"><a href="{{route('home')}}">Trang chủ</a></li>
+                                <li class="{{$url=='about'?'active':''}}"><a href="{{route('about')}}">Thông tin</a></li>
+                                <li class="{{$url=='contact'?'active':''}}"><a href="{{route('contact')}}">Liên hệ</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -228,7 +231,7 @@
                         <!-- Slider Background  Image Start-->
                         <div id="slider" class="nivoSlider">
                             @foreach($slide as $s)
-                                <a href="{{route('product.get',$s->category_id)}}"><img src="{{asset($s->path)}}" data-thumb="img/slider/1.jpg" alt="" title="#htmlcaption" /></a>
+                                <a href="{{route('product.get',$s->category_id)}}"><img src="{{asset($s->path)}}" data-thumb="{{asset($s->path)}}" alt="" title="#htmlcaption" /></a>
                             @endforeach
                         </div>
                         <!-- Slider Background  Image Start-->
