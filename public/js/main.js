@@ -594,7 +594,6 @@ NOTE: main.js, All custom script and plugin activation script in this file.
         var category = $("input[id='category']").val();
         var orderBy = $("select[name='price']").val();
         var producer = '';
-        alert(orderBy);
         $("input[name='producer']").each(function(index, el) {
             if ( el.checked==true ) {
               producer+=(el.value)+' ';

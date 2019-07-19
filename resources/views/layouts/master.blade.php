@@ -6,7 +6,7 @@
 		@yield('title')
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicons -->
-	    <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">  
+	    <link rel="shortcut icon" href="{{asset('img/icon-shortcut.png')}}">  
 	    <!-- Fontawesome css -->
 	    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 	    <!-- Ionicons css -->

@@ -31,8 +31,14 @@
                     		@method('PUT')
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list clearfix mb-sm-30">
+                                    <?php
+                                        $fullname = old('fullname');
+                                        if (Auth::check()) {
+                                            $fullname = Auth::user()->fullname;
+                                        }
+                                    ?>
                                     <label>Họ và tên<span class="required">*</span></label>
-                                    <input type="text" class="form-control edit-profile" name="fullname" placeholder="Nhập Họ và tên" value="{{Auth::check()?Auth::user()->fullname:old('fullname')}}" readonly/>
+                                    <input type="text" class="form-control edit-profile" name="fullname" placeholder="Nhập Họ và tên" value="{{$fullname}}" readonly/>
                                     @if($errors->has('fullname'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('fullname') }}</strong>
@@ -45,14 +51,30 @@
                                     <label>Giới tính<span class="required">*</span></label>
                                 </div>
                                 <div>
-	                                <label  class="checkbox-inline" for="nam"><input type="radio" name="gender" value="nam" id="nam" {{Auth::check()?Auth::user()->profile?Auth::user()->profile->gender=='nam'?'checked':'':'checked':'checked'}} /> Nam</label>
-	                            	<label class="checkbox-inline ml-15" for="nu"><input type="radio" name="gender" value="nu" id="nu" {{Auth::check()?Auth::user()->userprofile?Auth::user()->profile->gender=='nu'?'checked':'':'':''}}  /> Nữ</label>
+                                    <?php
+                                        $gender = 'nam';
+                                        if (Auth::check()) {
+                                            if (Auth::user()->profile) {
+                                                 $gender = Auth::user()->profile->gender;
+                                            }
+                                        }
+                                    ?>
+	                                <label  class="checkbox-inline" for="nam"><input type="radio" name="gender" value="nam" id="nam" {{$gender=='nam'?'checked':''}} /> Nam</label>
+	                            	<label class="checkbox-inline ml-15" for="nu"><input type="radio" name="gender" value="nu" id="nu" {{$gender=='nu'?'checked':''}}  /> Nữ</label>
                             	</div>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
+                                    <?php
+                                        $address = old('address');
+                                        if (Auth::check()) {
+                                            if (Auth::user()->profile) {
+                                                 $address = Auth::user()->profile->address;
+                                            }
+                                        }
+                                    ?>
                                     <label>Địa chỉ <span class="required">*</span></label>
-                                    <input type="text" class="form-control edit-profile" name="address" placeholder="Nhập địa chỉ" value="{{Auth::check()?Auth::user()->profile?Auth::user()->profile->address:old('address'):old('address')}}" readonly/>
+                                    <input type="text" class="form-control edit-profile" name="address" placeholder="Nhập địa chỉ" value="{{$address}}" readonly/>
                                     @if($errors->has('address'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('address') }}</strong>
@@ -62,6 +84,12 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
+                                    <?php
+                                        $email = old('email');
+                                        if (Auth::check()) {
+                                            $email = Auth::user()->email;
+                                        }
+                                    ?>
                                     <label>Email <span class="required">*</span></label>
                                     <input type="email" class="form-control edit-profile" name="email" placeholder="Nhập địa chỉ Email" value="{{Auth::check()?Auth::user()->email:old('email')}}" readonly/>
                                     @if($errors->has('email'))
@@ -73,8 +101,16 @@
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="checkout-form-list">
+                                    <?php
+                                        $phone = old('phone');
+                                        if (Auth::check()) {
+                                            if (Auth::user()->profile) {
+                                                 $phone = Auth::user()->profile->phone;
+                                            }
+                                        }
+                                    ?>
                                     <label>Sô điện thoại  <span class="required">*</span></label>
-                                    <input type="text" class="form-control edit-profile" name="phone" placeholder="Nhập số điện thoại của bạn" value="{{Auth::check()?Auth::user()->profile?Auth::user()->profile->phone:old('phone'):old('phone')}}" readonly />
+                                    <input type="text" class="form-control edit-profile" name="phone" placeholder="Nhập số điện thoại của bạn" value="{{$phone}}" readonly />
                                     @if($errors->has('phone'))
                                         <div class="col-md-12 alert alert-danger">
                                             <strong>{{ $errors->first('phone') }}</strong>

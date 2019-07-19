@@ -43,6 +43,9 @@
                             <ul class="ht-dropdown">
                             	@if(Auth::check())
                                 	<li><a href="{{route('user.profile.get',Auth::user()->id)}}">Thông tin tài khoản</a></li>
+                                    @if(Auth::user()->profile?Auth::user()->profile->role==2:false)
+                                        <li><a href="{{route('admin.get.dashboard')}}">Trang quản lí</a></li>
+                                    @endif
                                     <li><a href="{{route('user.logout.get')}}">Đăng xuất</a></li>
                                 @else
                                     <li><a href="{{route('user.login.get')}}">Đăng nhập</a></li>

@@ -67,7 +67,7 @@
                             ?>
                             <div class="rating">
                                 @for($i = 1 ;$i <=5; $i++)
-                                    <i class="fa fa-star{{$number_star>$i?'':'-o'}}"></i>
+                                    <i class="fa fa-star{{$number_star>=$i?'':'-o'}}"></i>
                                 @endfor
                                 <span class="badge badge-success">{{$number_star}}</span>
                             </div>
