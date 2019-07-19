@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Comment;
+use App\Order;
+use App\User;
+use App\UserProfile;
+use App\Product;
+
 
 class AdminController extends Controller
 {
@@ -15,7 +21,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin::index');
+         $newcomments=Comment::where('status', 0)->get();
+        $commentnum=count($newcomments);
+        $ordernotcompleted=Order::where('status','<',2)->get();
+        $userprofile=UserProfile::All();
+        $users=User::All();
+        $notprofilenum= count($users)-count($userprofile);
+        $productsempty=Product::where('quantity',0)->get();
+        $productsemptynum=count($productsempty);
+        return view('admin::dashboard.index', compact('commentnum','ordernotcompleted','notprofilenum','productsemptynum'));
     }
     public function logout(){
         \Auth::logout();
