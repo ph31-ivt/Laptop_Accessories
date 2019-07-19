@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Category;
 use App\Product;
 use App\User;
+use App\Slide;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,10 +30,11 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.header',function($view){
             $categories = Category::all();
+            $slide = Slide::all();
             $product = Product::all();
             $cart = \Cart::instance('cart')->content();
             $wishlist = \Cart::instance('wishlist')->content();
-            $view->with(['categories'=>$categories,'product'=>$product,'cart'=>$cart,'wishlist'=>$wishlist]);
+            $view->with(['categories'=>$categories,'product'=>$product,'cart'=>$cart,'wishlist'=>$wishlist,'slide'=>$slide]);
         });
 
         view()->composer('carts.cart',function($view){

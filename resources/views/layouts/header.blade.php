@@ -2,7 +2,7 @@
     <div class="popup_banner">
         <span class="popup_off_banner">×</span>
         <div class="banner_popup_area">
-                <img src="../img/banner/pop-banner.jpg" alt="">
+                <img src="{{asset('img/banner/pop-banner.jpg')}}" alt="">
         </div>
     </div>
     <!-- Banner Popup End -->
@@ -64,7 +64,7 @@
                 <div class="row align-items-center no-gutters">
                     <div class="col-lg-3 col-md-12">
                         <div class="logo mb-all-30">
-                            <a href="{{route('home')}}"><img src="{{asset('img/logo/logo.png')}}" alt="logo-image"></a>
+                            <a href="{{route('home')}}"><img src="{{asset('img/logo/logo3.png')}}" alt="logo-image"></a>
                         </div>
                     </div>
                     <!-- Categorie Search Box Start Here -->
@@ -192,7 +192,7 @@
                                                 <ul>
                                                     <li class="menu-tile"><strong>THƯƠNG HIỆU</strong></li>
                                                     @foreach($ct->products->groupBy('producer') as $key=>$producer)
-                                                        <li><a href="shop.html">{{$key}}</a></li>
+                                                        <li><a href="{{route('search.producer.get',['category_id'=>$ct->id,'producer'=>$key])}}">{{$key}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
@@ -204,7 +204,7 @@
                                                 <ul>
                                                     <li class="menu-tile">{{$ct_child->name}}</li>
                                                     @foreach($ct_child->properties as $child)
-                                                    <li><a href="{{$child->id}}">{{$child->name}}</a></li>
+                                                    <li><a href="{{route('search.property.get',['category_id'=>$ct_child->id,'property'=>$child->name])}}">{{$child->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </li>
@@ -224,8 +224,9 @@
                     <div class="slider-wrapper theme-default">
                         <!-- Slider Background  Image Start-->
                         <div id="slider" class="nivoSlider">
-                            <a href="shop.html"><img src="{{asset('img/slider/1.jpg')}}" data-thumb="img/slider/1.jpg" alt="" title="#htmlcaption" /></a>
-                            <a href="shop.html"><img src="{{asset('img/slider/2.jpg')}}" data-thumb="img/slider/2.jpg" alt="" title="#htmlcaption2" /></a>
+                            @foreach($slide as $s)
+                                <a href="{{route('product.get',$s->category_id)}}"><img src="{{asset($s->path)}}" data-thumb="img/slider/1.jpg" alt="" title="#htmlcaption" /></a>
+                            @endforeach
                         </div>
                         <!-- Slider Background  Image Start-->
                     </div>

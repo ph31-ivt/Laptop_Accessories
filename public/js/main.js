@@ -569,14 +569,14 @@ NOTE: main.js, All custom script and plugin activation script in this file.
         var token = $("input[name='_token']").val();
         var search = $("input[id='search']").val();
         var category = $("input[id='category']").val();
+        var orderBy = $("select[name='price']").val();
         var producer = '';
         $("input[name='producer']").each(function(index, el) {
             if ( el.checked==true ) {
               producer+=(el.value)+' ';
             }
         });
- 
-        $.post('fill/ajax',{'_token': token,'min': min,'max': max,'producer':producer.trim(),'search':search,'category':category}, function(data) {
+        $.post('/fill/ajax',{'_token': token,'min': min,'max': max,'producer':producer.trim(),'search':search,'category':category,'orderby':orderBy}, function(data) {
            $('.result-fill').empty().html(data);
 
            //$('.pro-pagination').html($(".pro-pagination").html());
@@ -586,26 +586,47 @@ NOTE: main.js, All custom script and plugin activation script in this file.
     $( "#amount" ).val(  number_format($( "#slider-range" ).slider( "values", 0 ),0,',','.') + "đ" +
       " - " + number_format($( "#slider-range" ).slider( "values", 1 ),0,',','.') + "đ" );
     
-    $("input[name='producer']").mouseup(function(event) {
+    $("input[name='producer']").click(function(event) {
         var min = $( "#slider-range" ).slider( "values", 0 );
         var max = $( "#slider-range" ).slider( "values", 1 );
         var token = $("input[name='_token']").val();
         var search = $("input[id='search']").val();
         var category = $("input[id='category']").val();
+        var orderBy = $("select[name='price']").val();
         var producer = '';
-
+        alert(orderBy);
         $("input[name='producer']").each(function(index, el) {
             if ( el.checked==true ) {
               producer+=(el.value)+' ';
             }
         });
-
-        $.post('fill/ajax',{'_token': token,'min': min,'max': max,'producer':producer.trim(),'search':search,'category':category}, function(data) {
+        $.post('/fill/ajax',{'_token': token,'min': min,'max': max,'producer':producer.trim(),'search':search,'category':category,'orderby':orderBy}, function(data) {
            $('.result-fill').empty().html(data);
            $('.pro-pagination').empty();
           // $('.pro-pagination').html($(".pro-pagination").html());
         });
     });
+
+    $("select[name='price']").change(function(event) {
+        var min = $( "#slider-range" ).slider( "values", 0 );
+        var max = $( "#slider-range" ).slider( "values", 1 );
+        var token = $("input[name='_token']").val();
+        var search = $("input[id='search']").val();
+        var category = $("input[id='category']").val();
+        var orderBy = $("select[name='price']").val();
+        var producer = '';
+        $("input[name='producer']").each(function(index, el) {
+            if ( el.checked==true ) {
+              producer+=(el.value)+' ';
+            }
+        });
+        $.post('/fill/ajax',{'_token': token,'min': min,'max': max,'producer':producer.trim(),'search':search,'category':category,'orderby':orderBy}, function(data) {
+           $('.result-fill').empty().html(data);
+           $('.pro-pagination').empty();
+          // $('.pro-pagination').html($(".pro-pagination").html());
+        });
+    });
+
         
     /*--------------------------
          banner colse Popup
@@ -695,6 +716,7 @@ NOTE: main.js, All custom script and plugin activation script in this file.
         $.post('/ajax/cancelorder',{'_token': token,'_method': method,'id': id}, function(data) {
             $("#alert-message").addClass('alert-success').html(data).fadeIn().delay(2000).fadeOut(500);
             $(this).prop('disabled', 'true');
+            location.reload();   //load lai trang
         });
     });
 

@@ -12,7 +12,7 @@
             <ul class="d-flex align-items-center">
                 <li><a href="{{route('home')}}">Trang chủ</a></li>
                 <li><a href="{{route('product.get',$products->category->id)}}">{{$products->category->name}}</a></li>
-                <li class="active"><a href="product.html">Sản phẩm</a></li>
+                <li class="active"><a href="#">Sản phẩm</a></li>
             </ul>
         </div>
     </div>
@@ -58,13 +58,20 @@
                     <div class="thubnail-desc fix">
                         <h3 class="product-header">{{$products->name}}</h3>
                         <div class="rating-summary fix mtb-10">
+                            <input type="hidden" name="number_rating" value="">
+                            <?php 
+                                $number_star = 0;
+                                if ($number_rating>0) {
+                                    $number_star = round($tatol_rating/$number_rating,2);
+                                }
+                            ?>
                             <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+                                @for($i = 1 ;$i <=5; $i++)
+                                    <i class="fa fa-star{{$number_star>$i?'':'-o'}}"></i>
+                                @endfor
+                                <span class="badge badge-success">{{$number_star}}</span>
                             </div>
+
                         </div>
                         <div class="pro-price mtb-20">
                             <p class="d-flex align-items-center"><span>Giá: </span><span class="price">{{number_format ( $products->price ,0 , "." ,"." )}}đ</span></p>
@@ -97,7 +104,7 @@
                             </div>
                         </div>
                         <div class="pro-ref mt-20">
-                            <p><span class="in-stock"><i class="ion-{{$products->quantity<0?'close':'checkmark'}}-round" style="{{$products->quantity<0?'color: red;':''}}"></i> {{$products->quantity<0?'Hết hàng':'Có trong kho'}} </span><span class="badge badge-{{$products->quantity<0?'danger':'success'}}">{{$products->quantity}}</span></p>
+                            <p><span class="in-stock"><i class="ion-{{$products->quantity<0?'close':'checkmark'}}-round" style="{{$products->quantity<0?'color: red;':''}}"></i> {{$products->quantity<0?'Hết hàng':'Còn hàng'}} </span><span class="badge badge-{{$products->quantity<0?'danger':'success'}}">{{$products->quantity}}</span></p>
                         </div>
                     </div>
                 </div>
@@ -147,40 +154,49 @@
                             </div>
                             <div class="col-md-4">
                                 <ul class="ul-rating">
+                                    <?php
+                                        if ($number_rating>0) {
+                                            $percent_one_star = round(($one_star/$number_rating)*100,2);
+                                            $percent_two_star = round(($two_star/$number_rating)*100,2);
+                                            $percent_three_star = round(($three_star/$number_rating)*100,2);
+                                            $percent_four_star = round(($four_star/$number_rating)*100,2);
+                                            $percent_five_star = round(($five_star/$number_rating)*100,2);
+                                        }
+                                    ?>
                                   <li class="d-inline-flex li-rating">
                                     <span class="blue">5 sao</span>
                                     <div class="progress">
-                                      <div class="progress-bar" style="width:70%">70%</div>
+                                        <div class="progress-bar" style="width:{{isset($percent_five_star)?$percent_five_star:0}}%">{{isset($percent_five_star)?$percent_five_star:0}}%</div>
                                     </div>
-                                    <span class="count-rating5">0</span>
+                                    <span class="count-rating5">{{$five_star}}</span>
                                   </li>
                                   <li class="d-inline-flex">
                                     <span class="blue">4 sao</span>
                                     <div class="progress">
-                                      <div class="progress-bar" style="width:70%">70%</div>
+                                        <div class="progress-bar" style="width:{{isset($percent_four_star)?$percent_four_star:0}}%">{{isset($percent_four_star)?$percent_four_star:0}}%</div>
                                     </div>
-                                    <span class="count-rating4">0</span>
+                                    <span class="count-rating4">{{$four_star}}</span>
                                   </li>
                                   <li class="d-inline-flex">
                                     <span class="blue">3 sao</span>
                                     <div class="progress">
-                                      <div class="progress-bar" style="width:70%">70%</div>
+                                      <div class="progress-bar" style="width:{{isset($percent_three_star)?$percent_one_star:0}}%">{{isset($percent_three_star)?$percent_one_star:0}}%</div>
                                     </div>
-                                    <span class="count-rating3">0</span>
+                                    <span class="count-rating3">{{$three_star}}</span>
                                   </li>
                                   <li class="d-inline-flex">
                                     <span class="blue">2 sao</span>
                                     <div class="progress">
-                                      <div class="progress-bar" style="width:70%">70%</div>
+                                      <div class="progress-bar" style="width:{{isset($percent_two_star)?$percent_one_star:0}}%">{{isset($percent_two_star)?$percent_one_star:0}}%</div>
                                     </div>
-                                    <span class="count-rating2">0</span>
+                                    <span class="count-rating2">{{$two_star}}</span>
                                   </li>
                                   <li class="d-inline-flex">
                                     <span class="blue">1 sao</span>
                                     <div class="progress">
-                                      <div class="progress-bar" style="width:70%">70%</div>
+                                      <div class="progress-bar" style="width:{{isset($percent_one_star)?$percent_one_star:0}}%">{{isset($percent_one_star)?$percent_one_star:0}}%</div>
                                     </div>
-                                    <span class="count-rating1">0</span>
+                                    <span class="count-rating1">{{$one_star}}</span>
                                   </li>
                                 </ul>
                               </div>

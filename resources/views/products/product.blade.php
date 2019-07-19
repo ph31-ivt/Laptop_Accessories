@@ -12,7 +12,13 @@
         <div class="breadcrumb">
             <ul class="d-flex align-items-center">
                 <li><a href="{{route('home')}}">Trang chủ</a></li>
-                <li class="active"><a href=""></a></li>
+                @if(is_object($category_list))
+                    @foreach($category_list as $list)
+                        <li class="active"><a href="{{route('product.get',$list->id)}}">{{$list->name}}</a></li>
+                    @endforeach
+                @else
+                    <li class="active"><a href="{{route('product.get',$category_list['id'])}}">{{$category_list['name']}}</a></li>
+                @endif
             </ul>
         </div>
     </div>
@@ -44,8 +50,8 @@
                             <div class="search-filter mb-40">
                                 <h3 class="sidebar-title">filter by price</h3>
                                 <form action="#" class="sidbar-style">
-                                    <input type="hidden" id="price-min" value="{{$products->min('price')}}">
-                                    <input type="hidden" id="price-max" value="{{$products->max('price')}}">
+                                    <input type="hidden" id="price-min" value="{{$price_min}}">
+                                    <input type="hidden" id="price-max" value="{{$price_max}}">
                                     <input type="hidden" id="category" value="{{$category_rp}}">
                                     <input type="hidden" id="search" value="{{isset($search)?$search:''}}">
                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -86,7 +92,7 @@
                     <!-- Product Top End -->                            
                     <!-- Single Banner Start -->
                     <div class="col-img">
-                        <a href="shop.html"><img src="../img/banner/banner-sidebar.jpg" alt="slider-banner"></a>
+                        <a href="shop.html"><img src="{{asset('img/banner/banner-sidebar.jpg')}}" alt="slider-banner"></a>
                     </div>
                     <!-- Single Banner End -->
                 </div>
@@ -105,9 +111,9 @@
                     <div class="main-toolbar-sorter clearfix">
                         <div class="toolbar-sorter d-flex align-items-center">
                             <label>Sắp xếp theo:</label>
-                            <select class="sorter wide">
-                                <option value="Price">Giá từ thấp đên cao</option>
-                                <option value="Price" selected>Giá từ cao đến thấp</option>
+                            <select class="sorter wide" name="price">
+                                <option value="asc">Giá từ thấp đên cao</option>
+                                <option value="desc" selected>Giá từ cao đến thấp</option>
                             </select>
                         </div>
                     </div>
