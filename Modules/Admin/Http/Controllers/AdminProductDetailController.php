@@ -34,13 +34,12 @@ class AdminProductDetailController extends Controller
         $productdetail=ProductDetail::where('product_id',$id)->get()->toArray();
         if(count($productdetail)==0){
             $profile=array();
-            return view('admin::productdetail.create',compact('product','profile','images', 'properties'));
         }
         else{
             $profile=($productdetail[0]['properties']);
             $properties=Property::where('category_id',$product->category_id)->get();
-            return view('admin::productdetail.create',compact('product','profile','images', 'properties'));
         } 
+        return view('admin::productdetail.create',compact('product','profile','images', 'properties'));
     }
 
     /**
@@ -48,7 +47,7 @@ class AdminProductDetailController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(CreateProductDetailRequest $request)
+    public function store(Request $request)
     {   
         //dd($request->except('_token'));
         $productdetail=$request->except('_token');

@@ -11,10 +11,11 @@
 |
 */
 
-Route::prefix('admin')->group(function() {
+Route::group(['prefix'=>'admin','middleware'=>'admin'], function() {
     Route::get('/', 'AdminController@index');
     Route::group(['prefix'=>'dashboard'], function(){
-    	Route::get('/','AdminDashboardController@index')->name('admin.get.dashboard');
+    Route::get('/','AdminDashboardController@index')->name('admin.get.dashboard');
+    Route::get('/logout','AdminController@logout')->name('logout');
     });
     Route::group(['prefix'=>'category'], function(){
     	Route::get('/','AdminCategoryController@index')->name('admin.get.listcategory');
@@ -23,6 +24,7 @@ Route::prefix('admin')->group(function() {
         Route::delete('/delete/{id}', 'AdminCategoryController@destroy')->name('delete-category');
         Route::get('/edit/{id}', 'AdminCategoryController@edit')->name('edit-category');
         Route::put('/update/{id}', 'AdminCategoryController@update')->name('update-category');
+        Route::get('/product_in_category/{id}','AdminCategoryController@getproducts')->name('get.product.ofcategory');
     });
     Route::group(['prefix'=>'product'], function(){
     	Route::get('/','AdminProductController@index')->name('admin.get.listproduct');
@@ -33,6 +35,7 @@ Route::prefix('admin')->group(function() {
         Route::put('/update/{id}','AdminProductController@update')->name('update-product');
         Route::post('/addquantity','AdminProductController@addquantity')->name('add-quantity');
         Route::get('/detail/{id}', 'AdminProductController@getdetail')->name('admin.product.detail');
+        Route::get('/product-sold-out', 'AdminProductController@getproductso')->name('get.product.soldout');
     });
     Route::group(['prefix'=>'productdetail'], function(){  
         Route::get('/create/{id}','AdminProductDetailController@create')->name('admin.create.productdetail');
@@ -43,16 +46,19 @@ Route::prefix('admin')->group(function() {
     	Route::get('/','AdminOrderController@index')->name('admin.get.listorder');
         Route::get('/oderdetail/{id}', 'AdminOrderDetailController@index')->name('get-order-detail');
         Route::get('/check-order/{id}/{index}','AdminOrderController@check')->name('check-order');
+        Route::get('/order-handle','AdminOrderController@orderhandle')->name('get.uncompleted.order');
     });
     Route::group(['prefix'=>'user'], function(){
     	Route::get('/index','AdminUserController@index')->name('admin.get.listuser');
-        Route::get('/{id}','AdminUserController@edit')->name('edit-user');
+        Route::get('/edit/{id}','AdminUserController@edit')->name('edit-user');
         Route::delete('/{id}','AdminUserController@destroy')->name('delete-user');
-        Route::put('/{id}','AdminUserController@update')->name('update-user');
+        Route::put('/update/{id}','AdminUserController@update')->name('update-user');
+        Route::get('/user-guest','AdminUserController@getguest')->name('admin.notprofileuser');
     });
     Route::group(['prefix'=>'comment'], function(){
     	Route::get('/','AdminCommentController@index')->name('admin.get.listcomment');
         Route::get('/update-status/{id}/{idex}','AdminCommentController@changestatus')->name('update-status');
+        Route::get('/newcomment', 'AdminCommentController@getnewcomment')->name('get.newcomment');
     });
     Route::group(['prefix'=>'image'], function(){
         Route::post('/store_image/{id}','AdminImageController@store')->name('store-image');
@@ -70,4 +76,5 @@ Route::prefix('admin')->group(function() {
         Route::post('/store_promotion', 'AdminPromotionController@store')->name('store-promotion');
         Route::delete('/delete_promotion/{id}', 'AdminPromotionController@destroy')->name('delete-promotion');
     });
+
 });

@@ -24,7 +24,7 @@ class CreatePromotionRequest extends FormRequest
     public function rules()
     {
         return [
-            'content'=>'required|min:5|max:100'
+            'content'=>'unique:promotions|required|min:5|max:100'
         ];
     }
 }

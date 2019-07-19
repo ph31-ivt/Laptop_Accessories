@@ -70,6 +70,14 @@ class AdminCommentController extends Controller
     {
         //
     }
+    public function getnewcomment(){
+
+         $commentlist=Comment::with('user', 'product')->where('status',0)->get();
+         if(count($commentlist)==0){
+            return redirect()->route('admin.get.dashboard');
+         }
+         return view('admin::comment.index',compact('commentlist'));
+    }
 
     /**
      * Remove the specified resource from storage.

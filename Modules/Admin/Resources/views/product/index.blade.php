@@ -60,7 +60,7 @@
                                     <td class="text-center"><img src="{{asset($product->main_image)}}" alt="failure" style="width: 60px; height: 60px;" class="img-circle {{$product->id}}"></td>
                                     <td id="{{$product->price}}">{{number_format($product->price)}} đ</td>
                                     <td class="text-center">{{$product->quantity}}</td>
-                                    <td>{{$product->category->name}}</td>
+                                    <td class="font-weight-bold"><a href="{{Route('get.product.ofcategory',$product->category->id)}}" class="text-decoration-none">{{$product->category->name}}</a></td>
                                     <td class="row">
                                         <button type="button" class="btn btn-info btn-sm ml-2" id="edit-item" data-product_id="{{$product->id}}" title="Import quantity for product"><i class="fas fa-plus-circle"></i></button>
                                         <a href="{{Route('admin.create.productdetail',$product->id)}}" class="btn btn-info btn-sm ml-1" title="show product and create detail "><i class="far fa-file-alt"></i></a>

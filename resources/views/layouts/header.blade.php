@@ -182,7 +182,7 @@
                         <nav>
                             <ul class="vertical-menu-list">
                                 @foreach($categories->where('parent_id',0) as $ct)
-                                    <li><a href="{{route('product.get',1)}}"><span><img src="{{asset('img/vertical-menu/'.$ct->icon)}}" alt="menu-icon"></span>{{$ct->name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                    <li><a href="{{route('product.get',1)}}"><span><img src="{{asset($ct->icon)}}" alt="menu-icon"></span>{{$ct->name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                                         <!-- Vertical Mega-Menu Start -->
                                         <ul class="ht-dropdown megamenu first-megamenu">
                                             <!-- Single Column Start -->

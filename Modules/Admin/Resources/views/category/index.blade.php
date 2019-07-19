@@ -43,7 +43,7 @@
                                             <tr class="" id="{{$category->id}} text-center">
                                                 <td class="text-center">{{$category->id}}</td>
                                                 <td class="text-center"><img src="{{asset($category->icon)}}" alt="icon fault" style="width: 60px; height: 60px;" class="img-circle"></td>
-                                                <td class="text-center">{{$category->name}}</td>
+                                                <td class="text-center font-weight-bold"><a href="{{Route('get.product.ofcategory',$category->id)}}">{{$category->name}}</a></td>
                                                 <td class=" pl-4 row mx-auto">
                                                     <a href="{{Route('edit-category', $category->id)}}" class="btn btn-secondary btn-sm ml-4" title="edit category"><i class="far fa-edit"></i></a>
                                                     <form action="{{Route('delete-category',$category->id)}}" method="post" onsubmit="return confirm('Deleting this category will delete things related to it! Do you want to delete');">

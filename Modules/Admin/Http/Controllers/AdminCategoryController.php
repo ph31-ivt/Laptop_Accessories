@@ -150,7 +150,10 @@ class AdminCategoryController extends Controller
        return back()->with('msg','Update category is successul')->with('attribute', 'success');
 
     } 
-
+    public function getproducts($id){
+        $productlist=Product::where('category_id', $id)->get();
+        return view('admin::product.index', compact('productlist'));
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

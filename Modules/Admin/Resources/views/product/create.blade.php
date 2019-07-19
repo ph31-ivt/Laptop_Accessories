@@ -46,17 +46,17 @@
                         <div class="form-group">
                             <label for="status" class="text-info font-weight-bold"><i class="fas fa-info-circle mr-2"></i>Status product<span class="text-danger ml-1">&#42;</span></label>
                             <select class="form-control" id="status" name="status" value="{{old('status')}}">
-                                <option value="0">--------------</option>
+                                <option value="">--------------</option>
                                 <option value="1">Hàng mới</option>
                                 <option value="2">Hàng hót</option>
-                                <option value="2">Hàng cũ</option>
+                                <option value="3">Hàng cũ</option>
                             </select>
                              <span class="text-danger font-weight-bold text-capitalize">{{$errors->first('status')}}</span>
                         </div>
                         <div class="form-group">
                             <label for="category_id" class="text-info font-weight-bold"><i class="fas fa-layer-group mr-2"></i>Category<span class="text-danger ml-1">&#42;</span></label>
                             <select class="form-control" id="category_id" name="category_id" value="{{old('category_id')}}">
-                                <option>---select category for product----</option>
+                                <option value="">---select category for product----</option>
                                 @foreach($categorylist as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach

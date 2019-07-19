@@ -16,7 +16,8 @@ class AdminPromotionController extends Controller
      */
     public function index()
     {   
-        return view('admin::promotion.index');
+        $promotionlist=Promotion::All();
+        return view('admin::promotion.index', compact('promotionlist'));
     }
 
     /**
@@ -78,6 +79,9 @@ class AdminPromotionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $promotion= Promotion::find($id);
+        $promotion->delete();
+        $promotion->forceDelete();
+        return back()->with('msg','delete promotion is successfull!')->with('attribute', 'success');
     }
 }

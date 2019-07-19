@@ -13,6 +13,8 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateQuantityRequest;
 use Illuminate\Support\Facades\File;
 use App\Category;
+use App\Promotion;
+use App\ProductPromotion;
 
 class AdminProductController extends Controller
 {
@@ -21,7 +23,7 @@ class AdminProductController extends Controller
      * @return Response
      */
     public function index()
-    {   
+    {  
         $productlist=Product::with('category')->get();
         return view('admin::product.index', compact('productlist'));
     }
@@ -59,7 +61,6 @@ class AdminProductController extends Controller
         $image->move(public_path("img/product"), $newname);
         $path='img/product/'.$newname;
         $data=$request->except('_token');
-        //dd($data);
         $data['main_image']=$path;
         Product::insert($data);
         return redirect()->Route('admin.get.listproduct');  
@@ -84,6 +85,9 @@ class AdminProductController extends Controller
     {   
         $product=Product::find($id);
         $categories=Category::All();
+        $promotions=Promotion::All();
+        $promotionlist=ProductPromotion::where('product_id',$id)->get('promotion_id')->pluck('promotion_id')->toArray();
+        //dd($promotionlist);
         $properties=Property::where('category_id', $product->category_id)->get();
         $productdetail=ProductDetail::where('product_id',$id)->get()->toArray();
         if(count($productdetail)==0){
@@ -92,8 +96,7 @@ class AdminProductController extends Controller
         else{
             $profile=($productdetail[0]['properties']);
         } 
-        //dd($profile);
-        return view('admin::product.edit', compact('product','properties','categories','profile'));
+        return view('admin::product.edit', compact('product','properties','categories','profile','promotions', 'promotionlist'));
     }
 
     /**
@@ -104,6 +107,7 @@ class AdminProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {   
+        $this->storepromotion($request->get('promotion_id'), $id);
         if($request->hasfile('main_image')){
             $old_img_path=Product::find($id)->main_image;
             if(File::exists($old_img_path)){
@@ -117,7 +121,6 @@ class AdminProductController extends Controller
             $data['main_image']=$path;
             $product=Product::find($id);
             $product->update($data);
-            
        }
        else{
              $product=Product::find($id);
@@ -129,7 +132,6 @@ class AdminProductController extends Controller
             $transfer= new AdminProductDetailController();
             $transfer->update($request, $id);
          return back()->with('attribute','success')->with('prt','product has been updated');
-        
     }
 
     /**
@@ -145,9 +147,6 @@ class AdminProductController extends Controller
         $product->save();
         return back()->with('msg','Add quantity is successful for '.$product->name)->with('attribute','success');
     }
-    public function getdetail($id){
-        dd(true);
-    }
     public function export($listorderdetail){
         foreach ($listorderdetail as $orderdetail) {
             $product=Product::find($orderdetail->product_id);
@@ -160,6 +159,14 @@ class AdminProductController extends Controller
                 return back()->with('msg','Not enough quantity to export')->with('attribute', 'danger');
             }
         }
+    }
+    public function getproductso(){
+        $productlist=Product::with('category')->where('quantity',0)->get();
+        return view('admin::product.index', compact('productlist'));
+    }
+    public function storepromotion($data, $id){
+          $product=Product::find($id);
+          $product->Promotions()->sync($data);
     }
     public function destroy($id)
     {

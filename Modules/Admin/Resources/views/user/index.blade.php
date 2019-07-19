@@ -33,7 +33,7 @@
                                         </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr class="text-info">
+                                        <tr class="text-info text-center">
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Email</th>
@@ -44,9 +44,9 @@
                                     <tbody>
                                         @foreach($userlist as $user)
 											<tr class="" id="{{$user->id}}">
-												<td>{{$user->id}}</td>
-												<td>{{$user->fullname}}</td>
-												<td>{{$user->email}}</td>
+												<td class="text-center">{{$user->id}}</td>
+												<td class="font-weight-bold text-muted">{{$user->fullname}}</td>
+												<td class="font-italic">{{$user->email}}</td>
 												<td class="row  pl-5 text-center">
 													<a href="{{Route('edit-user', $user->id)}}" class="btn btn-sm btn-info mr-2"><i class="far fa-edit"></i></a>
 													<form action="{{Route('delete-user',$user->id)}}" method="post" onsubmit="return confirm('Deleting this category will delete things related to it! Do you want to delete');">
