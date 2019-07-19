@@ -67,9 +67,9 @@
                         <div class="form-group">
                             <label for="role" class="text-info font-weight-bold">User role</label>
                            <select name="role" class="form-control">
-                              <option value="0" <?php if($profile->role==0) echo 'selected'; else echo null; ?>>Admin</option>
+                              <option value="2" <?php if($profile->role==2) echo 'selected'; else echo null; ?>>Admin</option>
                               <option value="1" <?php if($profile->role==1) echo 'selected'; else echo null; ?>>Member</option>
-                              <option value="2" <?php if($profile->role==2) echo 'selected'; else echo null; ?>>Guest</option>
+                              <option value="0" <?php if($profile->role==0) echo 'selected'; else echo null; ?>>Guest</option>
                            </select>
                            <span class="text-warning font-weight-bold text-capatalizer">{{$errors->first('role')}}</span>
                         </div>

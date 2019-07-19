@@ -5,6 +5,11 @@ namespace Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Comment;
+use App\Order;
+use App\User;
+use App\UserProfile;
+use App\Product;
 
 class AdminDashboardController extends Controller
 {
@@ -17,8 +22,15 @@ class AdminDashboardController extends Controller
          $this->middleware('auth');
     }
     public function index()
-    {
-        return view('admin::dashboard.index');
+    {   $newcomments=Comment::where('status', 0)->get();
+        $commentnum=count($newcomments);
+        $ordernotcompleted=Order::where('status','<',2)->get();
+        $userprofile=UserProfile::All();
+        $users=User::All();
+        $notprofilenum= count($users)-count($userprofile);
+        $productsempty=Product::where('quantity',0)->get();
+        $productsemptynum=count($productsempty);
+        return view('admin::dashboard.index', compact('commentnum','ordernotcompleted','notprofilenum','productsemptynum'));
     }
 
     /**

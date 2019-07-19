@@ -55,7 +55,6 @@
                     <!--  -->
                     <!--  -->
                     <div class="col-md-5 col-sm-12">
-                       
                         <div class="form-group">
                             <label for="status" class="text-info font-weight-bold"><i class="fas fa-info-circle mr-2"></i>Status product<span class="text-danger ml-1">&#42;</span></label>
                             <select class="form-control" id="status" name="status">
@@ -86,11 +85,28 @@
                       <div class="col-md-7 col-sm-12">
                         <div class="form-group">
                             <label for="" class="text-info font-weight-bold"><i class="fas fa-image mr-2"></i>Change main image</label>
-                            <div class="col-md-8 col-sm-12 text-center border border muted mx-auto my-2">
+                            <div class="col-md-8 col-sm-12 text-center border border rounded muted mx-auto my-2">
                                 <img src="{{asset($product->main_image)}}" alt="failure" style="width: 90%;">
                             </div>
                             <input type="file" name="main_image" class="col-md-10">
                             <span class="text-warning font-weight-bold text-capatalizer"></span>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label for="" class="text-info font-weight-bold"><i class="fas fa-ad mr-2"></i>Add promotion</label>
+                            </div>
+                            <div class="row">
+                                 @foreach($promotions as $promotion)
+                                @php 
+                                    $flag=in_array($promotion->id, $promotionlist);
+                                @endphp
+                                <div class="col-md-5 col-sm-12">
+                                    <input type="checkbox" name="promotion_id[]" value="{{$promotion->id}}" {{
+                                        $flag==true? "checked":""}} class="mr-3">
+                                    <span>{{$promotion->content}}</span>
+                                </div>  
+                            @endforeach
+                            </div>
                         </div>
                     </div>
                     <!--  -->
@@ -103,28 +119,34 @@
                                 {{ session('result') }}
                             </div>
                         @endif
-                        <div>
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <?php $i=0; $j=0; ?>
-                            @foreach($properties as $property)
-                            <div class="form-group">
-                                <label class="text-info font-weight-bold">{{$property->name}}:</label>
-                                <input type="hidden" name="properties[{{ $i }}][key]" class="form-control" 
-                                    value="{{$property->name}}">
-                                @if(count($profile)!=0 && !empty($profile[$j]['key']))
-                                    @if($profile[$j]['key']==$property->name)
-                                        <input type="text" name="properties[{{$i}}][value]" class="form-control" value="{{$profile[$j]['value']}}">
-                                        <?php $j++; ?>
-                                    @else
+                        @if(count($profile)!=0)
+                            <div>
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <?php $i=0; $j=0; ?>
+                                @foreach($properties as $property)
+                                <div class="form-group">
+                                    <label class="text-info font-weight-bold">{{$property->name}}:</label>
+                                    <input type="hidden" name="properties[{{ $i }}][key]" class="form-control" 
+                                        value="{{$property->name}}">
+                                    @if(count($profile)!=0 && !empty($profile[$j]['key']))
+                                        @if($profile[$j]['key']==$property->name)
+                                            <input type="text" name="properties[{{$i}}][value]" class="form-control" value="{{$profile[$j]['value']}}">
+                                            <?php $j++; ?>
+                                        @else
+                                            <input type="text" name="properties[{{$i}}][value]" class="form-control" value="">
+                                        @endif   
+                                    @else 
                                         <input type="text" name="properties[{{$i}}][value]" class="form-control" value="">
-                                    @endif   
-                                @else 
-                                    <input type="text" name="properties[{{$i}}][value]" class="form-control" value="">
-                                @endif
+                                    @endif
+                                </div>
+                                <?php $i++; ?>
+                                @endforeach
                             </div>
-                            <?php $i++; ?>
-                            @endforeach
-                        </div>
+                        @else
+                            <div class="rounded text-center pt-3 pb-2">
+                                <p class="font-weight-bold">No product detail data to changes!</p> 
+                            </div>
+                        @endif
                     </div>
                     <!--  -->
                    

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use App\UserProfile;
 
 class Admin
 {
@@ -17,12 +18,12 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-    
-        if (Auth::check()) {
-            //dd(Auth::User()->adminname());
-            return $next($request);
-            
+        $userprofile= UserProfile::where('user_id', Auth::id())->get()->toArray();
+        if(!empty($userprofile[0]["role"])){
+             if (Auth::check() && $userprofile[0]["role"]==2) {
+            return $next($request);    
+            }
         }
-        return redirect('/home');  
+        return redirect('/');  
     }
 }

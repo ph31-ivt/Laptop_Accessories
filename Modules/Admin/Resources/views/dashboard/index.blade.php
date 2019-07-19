@@ -2,6 +2,7 @@
 @section('content')
  <div class="container-fluid">
                     <!-- Breadcrumbs-->
+                    <!-- 'commentnum','ordernotcompleteds','notprofilenum','productsemptynum' -->
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
                             <a href="#">Dashboard</a>
@@ -16,10 +17,10 @@
                                     <div class="card-body-icon">
                                         <i class="fas fa-fw fa-comments"></i>
                                     </div>
-                                    <div class="mr-5">26 New Messages!</div>
+                                    <div class="mr-5">{{$commentnum}} New comment</div>
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
+                                <a class="card-footer text-white clearfix small z-1" href="{{Route('get.newcomment')}}">
+                                <span class="float-left font-weight-bold">View Details</span>
                                 <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
                                 </span>
@@ -32,9 +33,9 @@
                                     <div class="card-body-icon">
                                         <i class="fas fa-fw fa-list"></i>
                                     </div>
-                                    <div class="mr-5">11 New Tasks!</div>
+                                    <div class="mr-5">{{$notprofilenum}} User hasnt profile</div>
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="#">
+                                <a class="card-footer text-white clearfix small z-1" href="{{Route('admin.notprofileuser')}}">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
@@ -48,9 +49,9 @@
                                     <div class="card-body-icon">
                                         <i class="fas fa-fw fa-shopping-cart"></i>
                                     </div>
-                                    <div class="mr-5">123 New Orders!</div>
+                                    <div class="mr-5"> {{count($ordernotcompleted)}} uncompleted Orders </div>
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="#">
+                                <a class="card-footer text-white clearfix small z-1" href="{{Route('get.uncompleted.order')}}">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                 <i class="fas fa-angle-right"></i>
@@ -64,9 +65,9 @@
                                     <div class="card-body-icon">
                                         <i class="fas fa-fw fa-life-ring"></i>
                                     </div>
-                                    <div class="mr-5">13 New Tickets!</div>
+                                    <div class="mr-5">{{$productsemptynum}} products sold out</div>
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="#">
+                                <a class="card-footer text-white clearfix small z-1" href="{{Route('get.product.soldout')}}">
                                 <span class="float-left">View Details</span>
                                 <span class="float-right">
                                 <i class="fas fa-angle-right"></i>

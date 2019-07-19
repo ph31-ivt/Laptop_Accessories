@@ -57,7 +57,10 @@ class AdminUserController extends Controller
     public function edit($id)
     {   $user=User::find($id);
         $profile=User::find($id)->profile;
-        return view('admin::user.edit',compact('profile', 'user'));
+        if($profile!=null){
+             return view('admin::user.edit',compact('profile', 'user'));
+        }
+        return back()->with('msg', 'Create user_profile on user interface,  please!')->with('attribute', 'warning');
     }
 
     /**
@@ -77,7 +80,16 @@ class AdminUserController extends Controller
       return back()->with('msg', 'Update is successful');
 
     }
-
+    public function getguest(){
+        $userlist=User::with('profile')->get();
+        for($i=0; $i<count($userlist); $i++)
+        {
+            if($userlist[$i]->profile!=null){
+                unset($userlist[$i]);
+            }
+        }
+        return view('admin::user.index',compact('userlist'));
+    }
     /**
      * Remove the specified resource from storage.
      * @param int $id

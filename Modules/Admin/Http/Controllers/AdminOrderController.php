@@ -69,6 +69,10 @@ class AdminOrderController extends Controller
     {
         
     }
+    public function orderhandle(){
+        $orders=Order::with('user')->where('status','<',2)->get();
+        return view('admin::order.index', compact('orders'));
+    }
 
     /**
      * Remove the specified resource from storage.

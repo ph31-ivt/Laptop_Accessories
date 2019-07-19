@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Auth;
     $admin=Auth::User()->adminname();
     
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,7 +26,7 @@
     </head>
     <body id="page-top">
         <nav class="navbar navbar-expand navbar-dark bg-info static-top">
-            <a class="navbar-brand mr-1" href="index.html">Laptop Accessories</a>
+            <a class="navbar-brand mr-1" href="{{Route('home')}}">Laptop Accessories</a>
             <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
             </button>
@@ -74,7 +74,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Admin: {{$admin}}</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                     </div>
@@ -201,7 +200,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
+                        <a class="btn btn-primary" href="{{Route('logout')}}">Logout</a>
                     </div>
                 </div>
             </div>

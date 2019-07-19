@@ -124,4 +124,5 @@ class UserController extends Controller
         \Mail::to($email)->send(new ContactMail($email,$content));  // sen toi email nao  
         dd('done');
     }
+    
 }

@@ -98,6 +98,6 @@ Auth::routes();
 // Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware'=>['auth', 'admin']],function(){
  	Route::get('/hello', function(){
- 		return view('admin::category.index');
+ 		return redirect()->route('admin.get.dashboard');
  	});
 });

@@ -20,6 +20,9 @@
                 <i class="fas fa-laptop"></i>
                 Product Detail Create
             </div>
+            <div class="col-md-2 col-sm-12 bg-info rounded pt-1 pb-1 text-center">
+                <a href="{{Route('admin.get.listproduct')}}" class="text-white">Productlist</a>
+            </div>
         </div>
         <div class="border-bottom mr-4 ml-4 mb-4 ">
             <h3 class="text-info font-weight-bold pt-4 pb-4">Product: {{$product->name}}</h3>
@@ -60,7 +63,7 @@
                 </div>
                 <h4 class="text-dark border-bottom border-top py-2">Detail:</h4>
                 @if(count($profile)==0)
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger text-center">
                         Create detail for {{$product->name}}
                     </div>
                 @endif
@@ -91,29 +94,29 @@
                     </form>
                 <!--  -->
             </div>
-            <div class="col-md-6 col-sm-12 my-2">
-                <h4 class="mx-auto">Create detail information<span class="text-danger ml-1">&#42;</span></h4>
-                <span class="text-warning font-weight-bold text-capatalizer">{{$errors->first('product_id')}}</span>
-                <form action="{{Route('store-product-detail')}}" method="post">
-                    <input type="hidden" name="product_id" value="{{$product->id}}">
-                    @csrf
-                    <?php $i=0; ?>
-                    @foreach($properties as $property)
-                        <div class="form-group">
-                            <label class="text-info font-weight-bold">{{$property->name}}:</label>
-                            <input type="hidden" name="properties[{{ $i }}][key]" class="form-control" 
-                                                value="{{$property->name}}">
-                            <input type="text" name="properties[{{$i}}][value]" class="form-control" value="">
+            @if(count($profile)==0)
+                <div class="col-md-6 col-sm-12 my-2">
+                    <h4 class="mx-auto">Create detail information<span class="text-danger ml-1">&#42;</span></h4>
+                    <form action="{{Route('store-product-detail')}}" method="post">
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        @csrf
+                        <?php $i=0; ?>
+                        @foreach($properties as $property)
+                            <div class="form-group">
+                                <label class="text-info font-weight-bold">{{$property->name}}:</label>
+                                <input type="hidden" name="properties[{{ $i }}][key]" class="form-control" 
+                                                    value="{{$property->name}}">
+                                <input type="text" name="properties[{{$i}}][value]" class="form-control" value="">
+                            </div>
+                        <?php $i++; ?>
+                        @endforeach
+                        <div class="form-group text-center">
+                               <button type="submit" class="btn-success rounded">Create</button> 
                         </div>
-                    <?php $i++; ?>
-                    @endforeach
-                    <div class="form-group text-center">
-                           <button type="submit" class="btn-success rounded">Create</button>
-                    </div>
-                    <!--  -->
-                </form>
-                
-            </div>     
+                        <!--  -->
+                    </form>
+                </div>  
+            @endif   
         </div>
         <!--  -->
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
